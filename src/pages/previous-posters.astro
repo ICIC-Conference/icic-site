@@ -1,0 +1,57 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import { getCollection } from "astro:content";
+
+const posters = await getCollection("posters");
+
+const divisionLabels = {
+  university: "University",
+  highschool: "High School",
+};
+
+const groupedByYear = posters.reduce((acc, poster) => {
+  const year = poster.data.year;
+
+  if (!acc[year]) {
+    acc[year] = [];
+  }
+
+  acc[year].push(poster);
+  return acc;
+}, {});
+
+const sortedYears = Object.keys(groupedByYear)
+  .map(Number)
+  .sort((a, b) => b - a);
+---
+
+<MainLayout title="Previous Posters">
+  <h2>Previous Posters</h2>
+
+  <p>Total poster records loaded: {posters.length}</p>
+
+  {sortedYears.map((year) => (
+    <section>
+      <h3>{year}</h3>
+
+      <ul>
+        {groupedByYear[year].map((poster) => (
+          <article style="border:1px solid #ccc; padding:16px; margin-bottom:20px; max-width:600px;">
+  <h4>{poster.data.title}</h4>
+
+  <img
+    src={poster.data.posterImage}
+    alt={poster.data.title}
+    style="max-width:100%; margin-bottom:10px;"
+  />
+
+  <p><strong>Division:</strong> {divisionLabels[poster.data.division] ?? poster.data.division}</p>
+  <p><strong>Category:</strong> {poster.data.category}</p>
+  <p><strong>Authors:</strong> {poster.data.authors.join(", ")}</p>
+  <p><strong>Prize:</strong> {poster.data.prize ?? "None"}</p>
+</article>
+        ))}
+      </ul>
+    </section>
+  ))}
+</MainLayout>

@@ -1,0 +1,371 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout title="Oral Presentations">
+  <style>
+    .page-body {
+      background: var(--cream);
+    }
+
+    .page-hero {
+      background: var(--navy);
+      background-image: url('/images/site/hero-oral.jpg');
+      background-size: cover;
+      background-position: center;
+      padding: 56px 56px 48px;
+      min-height: 220px;
+      position: relative;
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(27, 51, 82, 0.72);
+    }
+
+    .page-hero .section-label,
+    .page-hero h2,
+    .page-hero .hero-sub {
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-hero h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 600;
+      color: var(--white);
+      margin: 0 0 12px 0;
+      line-height: 1.25;
+      max-width: 720px;
+    }
+
+    .page-hero .hero-sub {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.75);
+      margin: 0;
+      letter-spacing: 0.02em;
+    }
+
+    .content-section {
+      padding: 56px;
+      max-width: 960px;
+    }
+
+    .cfp-lede {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 0 0 1.2em 0;
+      line-height: 1.6;
+      padding-bottom: 1.2em;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .intro p {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--text);
+      font-weight: 300;
+      margin: 0 0 1.4em 0;
+    }
+
+    /* Two-column info blocks */
+    .info-section {
+      border-top: 1px solid var(--rule);
+      padding-top: 48px;
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .info-block h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 0 0 18px 0;
+    }
+
+    .info-block p {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 300;
+      line-height: 1.6;
+      margin: 0 0 12px 0;
+    }
+
+    .info-block ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .info-block ul li {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 300;
+      padding: 8px 0 8px 16px;
+      position: relative;
+      line-height: 1.6;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .info-block ul li:first-child {
+      border-top: 1px solid var(--rule);
+    }
+
+    .info-block ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+    }
+
+    .info-block a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .info-block a:hover {
+      text-decoration: underline;
+    }
+
+    .deadline {
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    /* Participants */
+    .participants-section {
+      border-top: 1px solid var(--rule);
+      padding-top: 48px;
+      margin-top: 48px;
+    }
+
+    .participants-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 0 0 28px 0;
+    }
+
+    .participants-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .speaker-group h3 {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 0 0 12px 0;
+    }
+
+    .speaker-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .speaker-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.4;
+    }
+
+    .speaker-list li:first-child {
+      border-top: 1px solid var(--rule);
+    }
+
+    .speaker-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--navy);
+      display: block;
+    }
+
+    .speaker-affiliation {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 300;
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* Closing */
+    .closing-note {
+      border-top: 1px solid var(--rule);
+      padding-top: 32px;
+      margin-top: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .closing-note p {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 300;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .closing-note p a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .closing-note p a:hover {
+      text-decoration: underline;
+    }
+
+    .submit-button {
+      display: inline-block;
+      padding: 14px 28px;
+      background: var(--gold);
+      color: var(--white) !important;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-decoration: none !important;
+      border-radius: 4px;
+      transition: background 0.15s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .submit-button:hover {
+      background: #9a7020;
+    }
+
+    @media (max-width: 860px) {
+      .page-hero {
+        padding: 40px 28px 36px;
+      }
+
+      .content-section {
+        padding: 40px 28px;
+      }
+
+      .info-section,
+      .participants-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .closing-note {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+
+  <div class="page-body">
+    <div class="page-hero">
+      <h2>Seventy Years Forward: Liberal Learning for a Changing World</h2>
+      <p class="hero-sub">June 25, 2026 · Tunghai University, Taichung</p>
+    </div>
+
+    <div class="content-section">
+
+      <p class="cfp-lede">The International College at Tunghai University invites submissions of abstracts for oral presentations at ICIC 2026. The deadline for submissions is May 5.</p>
+
+      <div class="intro">
+        <p>
+          As Tunghai University approaches its seventieth anniversary, the International College invites scholars who teach and conduct research in English to share work that reflects the breadth and diversity of academic inquiry within English-medium higher education. We place particular emphasis on scholars teaching in non-English-dominant contexts, such as international colleges, where English functions as a shared academic language across linguistic, cultural, and disciplinary boundaries.
+        </p>
+        <p>
+          International colleges occupy a distinctive position within higher education: multilingual in practice, globally oriented in outlook, and committed to both academic breadth and professional preparation. These environments raise important questions about how liberal learning is pursued and communicated in such contexts. ICIC 2026 provides a forum for exploring these questions indirectly, through the presentation of diverse research and teaching-related work across disciplines.
+        </p>
+        <p>
+          In this spirit, ICIC 2026 welcomes submissions from all academic fields. Submissions need not address the conference theme directly; rather, the conference highlights how the full range of scholarly work conducted in English-medium, internationally oriented settings contributes to liberal learning in an increasingly interconnected world.
+        </p>
+      </div>
+
+      <div class="info-section">
+        <div class="info-block">
+          <h2>Submissions</h2>
+          <ul>
+            <li>Submit a title and 300-word abstract via the online form</li>
+            <li><span class="deadline">Deadline: May 5</span> — acceptance decisions communicated by late May</li>
+          </ul>
+        </div>
+
+        <div class="info-block">
+          <h2>Conference Support</h2>
+          <p>Funding permitting, we anticipate being able to provide the following for a limited number of participants:</p>
+          <ul>
+            <li>Two nights of accommodation</li>
+            <li>High-speed rail tickets from Taoyuan International Airport to Taichung</li>
+            <li>A modest per diem</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="participants-section">
+        <h2>Participants</h2>
+        <div class="participants-grid">
+          <div class="speaker-group">
+            <h3>Keynote Speaker</h3>
+            <ul class="speaker-list">
+              <li>
+                <span class="speaker-name">Chi-Hung Juan</span>
+                <span class="speaker-affiliation">Chair Professor and Executive Vice President, National Central University</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="speaker-group">
+            <h3>Invited Speakers</h3>
+            <ul class="speaker-list">
+              <li>
+                <span class="speaker-name">Marc Lanteigne</span>
+                <span class="speaker-affiliation">Professor of Political Science, Arctic University of Norway, Tromsø</span>
+              </li>
+              <li>
+                <span class="speaker-name">Makito Yurita</span>
+                <span class="speaker-affiliation">Professor, National Institute for School Teachers and Staff Development</span>
+              </li>
+              <li>
+                <span class="speaker-name">Cham Tat Huei</span>
+                <span class="speaker-affiliation">Professor of Marketing, Swinburne University of Technology, Malaysian Campus</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="closing-note">
+        <p>
+          This is a fully in-person conference.<br>
+          Questions may be directed to Chifumi Takagi at <a href="mailto:ctakagi@thu.edu.tw">ctakagi@thu.edu.tw</a>.
+        </p>
+        <a href="https://forms.gle/LEwj9x1rUFDZZgff7" class="submit-button">Submit an Abstract →</a>
+      </div>
+
+    </div>
+  </div>
+</MainLayout>

@@ -1,0 +1,385 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout title="Poster Presentations">
+  <style>
+    .page-body {
+      background: var(--cream);
+    }
+
+    .page-hero {
+      background: var(--navy);
+      background-image: url('/images/site/hero-presentations.jpg');
+      background-size: cover;
+      background-position: center;
+      padding: 56px 56px 48px;
+      min-height: 220px;
+      position: relative;
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(27, 51, 82, 0.72);
+    }
+
+    .page-hero h2 {
+      position: relative;
+      z-index: 1;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 600;
+      color: var(--white);
+      margin: 0;
+      line-height: 1.25;
+    }
+
+    .content-section {
+      padding: 56px;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 56px;
+    }
+
+    .category-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .category-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 0 0 6px 0;
+      line-height: 1.2;
+    }
+
+    .category-card .guidance {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-style: italic;
+      margin: 0 0 18px 0;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.5;
+      min-height: 72px;
+    }
+
+    .category-card ul {
+      margin: 0 0 18px 0;
+      padding: 0;
+      list-style: none;
+      flex: 1;
+    }
+
+    .category-card ul li {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      font-weight: 300;
+      padding: 5px 0;
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.4;
+    }
+
+    .category-card ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+    }
+
+    .category-card .fit-note {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.85rem;
+      color: var(--navy);
+      font-weight: 500;
+      margin: 0;
+      padding-top: 14px;
+      border-top: 1px solid var(--rule);
+      line-height: 1.5;
+    }
+
+    /* Eligibility & Submission */
+    .info-section {
+      border-top: 1px solid var(--rule);
+      padding-top: 48px;
+      margin-bottom: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .info-block h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 0 0 18px 0;
+    }
+
+    .info-block ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .info-block ul li {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 300;
+      padding: 6px 0 6px 16px;
+      position: relative;
+      line-height: 1.5;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .info-block ul li:first-child {
+      border-top: 1px solid var(--rule);
+    }
+
+    .info-block ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+    }
+
+    .info-block .info-note {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 300;
+      margin: 14px 0 0 0;
+      line-height: 1.5;
+    }
+
+    .deadline {
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    /* Prizes */
+    .prizes-section {
+      border-top: 1px solid var(--rule);
+      padding-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .prizes-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 0 0 8px 0;
+    }
+
+    .prizes-note {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 0 0 28px 0;
+      font-weight: 300;
+    }
+
+    .prize-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--rule);
+    }
+
+    .prize-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--rule);
+      background: var(--white);
+    }
+
+    .prize-item:last-child {
+      border-bottom: none;
+    }
+
+    .prize-rank {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .prize-amount {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--gold);
+    }
+
+    .submit-wrap {
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 4px;
+    }
+
+    .submit-button {
+      display: inline-block;
+      padding: 14px 28px;
+      background: var(--gold);
+      color: var(--white);
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+
+    .submit-button:hover {
+      background: #9a7020;
+    }
+
+    @media (max-width: 1000px) {
+      .categories {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .page-hero {
+        padding: 40px 28px 36px;
+      }
+
+      .content-section {
+        padding: 40px 28px;
+      }
+
+      .prizes-section {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .info-section {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+  </style>
+
+  <div class="page-body">
+    <div class="page-hero">
+      <h2>Poster Presentations</h2>
+    </div>
+
+    <div class="content-section">
+
+      <div class="categories">
+        <div class="category-card">
+          <h3>Business &amp; Social Sciences</h3>
+          <p class="guidance">Choose this category if your project mainly looks at how people, groups, or organizations work in the real world.</p>
+          <ul>
+            <li>Business, marketing, finance</li>
+            <li>Psychology and behaviour</li>
+            <li>Society, culture, education</li>
+            <li>Communication, media, public issues</li>
+            <li>Governments, institutions, international affairs</li>
+          </ul>
+          <p class="fit-note">If your project studies real-world behaviour, systems, trends, or practical problems, it fits here.</p>
+        </div>
+
+        <div class="category-card">
+          <h3>Natural &amp; Environmental Sciences</h3>
+          <p class="guidance">Choose this category if your project is about nature, science, the environment, or technology.</p>
+          <ul>
+            <li>Biology, chemistry, physics</li>
+            <li>Environmental issues, ecosystems, sustainability</li>
+            <li>Engineering, computing, data, algorithms</li>
+            <li>Scientific experiments or technical designs</li>
+          </ul>
+          <p class="fit-note">If your project studies how natural or technical systems work, it fits here.</p>
+        </div>
+
+        <div class="category-card">
+          <h3>Arts &amp; Humanities</h3>
+          <p class="guidance">Choose this category if your project is mainly about ideas, values, meaning, culture, ethics, language, creativity, or how we understand human experience.</p>
+          <ul>
+            <li>Literature, writing, languages</li>
+            <li>Philosophy, ethics, religion</li>
+            <li>History, culture, communication</li>
+            <li>Art or design concepts presented in poster form</li>
+            <li>Questions about values, principles, or meaning</li>
+          </ul>
+          <p class="fit-note">If your project focuses on ideas, values, culture, or how we make sense of the human world, it fits here.</p>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <div class="info-block">
+          <h2>Who May Apply</h2>
+          <ul>
+            <li>University students — any level, any institution</li>
+            <li>High school students — Grades 1–3</li>
+          </ul>
+          <p class="info-note">Maximum 4 students per group. All submissions must be in English.</p>
+        </div>
+
+        <div class="info-block">
+          <h2>What You Submit</h2>
+          <ul>
+            <li><span class="deadline">By May 8:</span> Poster title and abstract, submitted via the online form</li>
+            <li><span class="deadline">By June 5:</span> A1 poster file (PDF, JPG, or PNG)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="prizes-section">
+        <div>
+          <h2>Prizes</h2>
+          <p class="prizes-note">Awarded per category, in both High School and University divisions.</p>
+          <div class="prize-list">
+            <div class="prize-item">
+              <span class="prize-rank">1st Place</span>
+              <span class="prize-amount">NT$3,000</span>
+            </div>
+            <div class="prize-item">
+              <span class="prize-rank">2nd Place</span>
+              <span class="prize-amount">NT$2,000</span>
+            </div>
+            <div class="prize-item">
+              <span class="prize-rank">3rd Place</span>
+              <span class="prize-amount">NT$1,000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding-top: 32px;">
+        <a href="https://forms.gle/ykdUsYnfrtq8CUsA9" class="submit-button">Submit a Poster Proposal →</a>
+      </div>
+
+      <p style="font-family: 'Source Sans 3', sans-serif; font-size: 0.9rem; color: var(--muted); font-weight: 300; line-height: 1.6; margin: 24px 0 0 0;">
+        Questions may be directed to Tan Jue Xin at <a href="mailto:tanjx@thu.edu.tw" style="color: var(--gold); text-decoration: none;">tanjx@thu.edu.tw</a> or Mrinalini Mishra at <a href="mailto:mishra_m@thu.edu.tw" style="color: var(--gold); text-decoration: none;">mishra_m@thu.edu.tw</a>.
+      </p>
+
+    </div>
+  </div>
+</MainLayout>

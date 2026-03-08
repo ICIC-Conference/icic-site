@@ -1,0 +1,313 @@
+---
+import { getCollection } from "astro:content";
+
+const { title } = Astro.props;
+
+const posters = await getCollection("posters");
+
+const years = [...new Set(posters.map((poster) => poster.data.year))]
+  .sort((a, b) => {
+    if (a === "Current") return -1;
+    if (b === "Current") return 1;
+    return b - a;
+  });
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@300;400;500;600&display=swap');
+
+      :root {
+        --navy: #1b3352;
+        --gold: #b8882a;
+        --gold-light: #e8c96a;
+        --cream: #f8f6f1;
+        --rule: #d8d0c0;
+        --white: #ffffff;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        font-family: 'Source Sans 3', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: var(--cream);
+      }
+
+      header {
+        background: var(--navy);
+        padding: 20px 56px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+        position: sticky;
+        top: 0;
+        z-index: 200;
+      }
+
+      .site-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--white);
+        margin: 0;
+        line-height: 1.3;
+        flex-shrink: 0;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .nav-link,
+      nav summary {
+        display: inline-block;
+        padding: 8px 14px;
+        border-radius: 4px;
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.8);
+        cursor: pointer;
+        font-family: 'Source Sans 3', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        transition: color 0.15s, background 0.15s;
+        list-style: none;
+      }
+
+      .nav-link:hover,
+      nav summary:hover {
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      details { position: relative; }
+
+      details[open] summary {
+        color: var(--gold-light);
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      details summary { list-style: none; }
+      details summary::-webkit-details-marker { display: none; }
+
+      .dropdown-menu {
+        position: absolute;
+        right: 0;
+        top: calc(100% + 6px);
+        padding: 6px 0;
+        border: 1px solid var(--rule);
+        border-radius: 4px;
+        background: white;
+        min-width: 110px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        z-index: 100;
+      }
+
+      .dropdown-menu a {
+        display: block;
+        padding: 8px 16px;
+        text-decoration: none;
+        color: var(--navy);
+        font-family: 'Source Sans 3', sans-serif;
+        font-size: 0.9rem;
+      }
+
+      .dropdown-menu a:hover {
+        background: var(--cream);
+        color: var(--gold);
+      }
+
+      main {
+        padding: 0;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      footer {
+        background: var(--navy);
+        padding: 40px 56px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 32px;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
+      .footer-nav {
+        display: grid;
+        grid-template-rows: repeat(3, auto);
+        grid-auto-flow: column;
+        gap: 8px 32px;
+      }
+
+      .footer-nav a {
+        text-decoration: none;
+        color: rgba(255,255,255,0.7);
+        font-family: 'Source Sans 3', sans-serif;
+        font-size: 0.9rem;
+        transition: color 0.15s;
+      }
+
+      .footer-nav a:hover { color: var(--gold-light); }
+
+      .footer-contact {
+        font-family: 'Source Sans 3', sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.7);
+        line-height: 1.8;
+      }
+
+      .footer-contact a {
+        color: var(--gold-light);
+        text-decoration: none;
+      }
+
+      .footer-contact a:hover { text-decoration: underline; }
+
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 4px;
+      }
+
+      .hamburger span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--white);
+        transition: all 0.2s;
+      }
+
+      @media (max-width: 860px) {
+        header {
+          padding: 16px 28px;
+          flex-wrap: wrap;
+        }
+
+        .hamburger { display: flex; }
+
+        nav {
+          display: none;
+          flex-direction: column;
+          align-items: stretch;
+          width: 100%;
+          gap: 2px;
+          padding-bottom: 8px;
+        }
+
+        nav.open { display: flex; }
+
+        .nav-link,
+        nav summary {
+          width: 100%;
+          padding: 10px 14px;
+        }
+
+        details { width: 100%; }
+
+        .dropdown-menu {
+          position: static;
+          margin-top: 2px;
+          width: 100%;
+          box-shadow: none;
+          border-color: rgba(255, 255, 255, 0.15);
+          background: rgba(255, 255, 255, 0.08);
+        }
+
+        .dropdown-menu a { color: rgba(255, 255, 255, 0.8); }
+
+        .dropdown-menu a:hover {
+          background: rgba(255, 255, 255, 0.1);
+          color: var(--white);
+        }
+      }
+
+      @media (max-width: 720px) {
+        .footer-nav {
+          grid-template-rows: none;
+          grid-auto-flow: row;
+        }
+      }
+
+      @media (max-width: 560px) {
+        footer {
+          padding: 32px 28px;
+          flex-direction: column;
+          gap: 24px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1 class="site-title">International Conference on International Colleges</h1>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav id="main-nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/oral-presentations" class="nav-link">Oral Presentations</a>
+        <a href="/poster-presentations" class="nav-link">Poster Presentations</a>
+
+        <details>
+          <summary>Posters</summary>
+          <div class="dropdown-menu">
+            {years.map((year) => (
+              <a href={`/previous-posters/${year}`}>{year}</a>
+            ))}
+          </div>
+        </details>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      <div class="footer-nav">
+        <a href="/">Home</a>
+        <a href="/oral-presentations">Oral Presentations</a>
+        <a href="/poster-presentations">Poster Presentations</a>
+        {years.map((year) => (
+          <a href={`/previous-posters/${year}`}>Posters – {year}</a>
+        ))}
+      </div>
+
+      <div class="footer-contact">
+        <div>Contact: Ms. Tiffany Xie</div>
+        <div>Email: <a href="mailto:icic@thu.edu.tw">icic@thu.edu.tw</a></div>
+        <div>Phone: <a href="tel:+886423598941">+886-4-2359-8941</a>, x39303</div>
+      </div>
+    </footer>
+  </body>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('main-nav');
+    hamburger.addEventListener('click', () => {
+      nav.classList.toggle('open');
+    });
+  </script>
+</html>
