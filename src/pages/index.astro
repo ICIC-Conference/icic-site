@@ -2,6 +2,7 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import homepageData from "../data/homepage";
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const { hero, theme, keynote, schedule, importantDates, documents, sponsors, footer } = homepageData;
 ---
 
@@ -438,7 +439,7 @@ const { hero, theme, keynote, schedule, importantDates, documents, sponsors, foo
 
     <!-- Hero -->
     <section class="hero">
-      <img src={hero.image} alt={hero.title} class="hero-image" />
+      <img src={`${base}${hero.image}`} alt={hero.title} class="hero-image" />
       <div class="hero-overlay">
         <div class="hero-text">
           <p class="hero-label">ICIC 2026</p>
@@ -466,7 +467,7 @@ const { hero, theme, keynote, schedule, importantDates, documents, sponsors, foo
 
       <div class="keynote-grid">
         <div class="keynote-image-wrap">
-          <img src={keynote.image} alt={keynote.name} class="keynote-image" />
+          <img src={`${base}${keynote.image}`} alt={keynote.name} class="keynote-image" />
           <div class="keynote-image-accent"></div>
         </div>
 
@@ -553,7 +554,7 @@ const { hero, theme, keynote, schedule, importantDates, documents, sponsors, foo
         <div class="sponsor-grid">
           {sponsors.map((sponsor) => (
             <a href={sponsor.href} title={sponsor.name} target="_blank" rel="noopener noreferrer">
-              <img src={sponsor.image} alt={sponsor.name} />
+              <img src={`${base}${sponsor.image}`} alt={sponsor.name} />
             </a>
           ))}
         </div>
