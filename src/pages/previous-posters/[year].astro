@@ -12,6 +12,8 @@ export async function getStaticPaths() {
 
 const { year } = Astro.params;
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 const allPosters = await getCollection("posters");
 
 const posters = allPosters.filter(
@@ -89,7 +91,6 @@ function slugify(str) {
 
     .page-hero {
       background: var(--navy);
-      background-image: url('/images/site/hero-presentations.jpg');
       background-size: cover;
       background-position: center;
       padding: 56px 56px 48px;
@@ -286,7 +287,7 @@ function slugify(str) {
   </style>
 
   <div class="page-body">
-    <div class="page-hero" id="top">
+    <div class="page-hero" id="top" style={`background-image: url('${base}/images/site/hero-posters.jpg')`}>
       <h2>Posters – {year}</h2>
     </div>
 
@@ -314,21 +315,21 @@ function slugify(str) {
               {groupedByCategory[category].map((poster) => (
                 <div class="poster-card">
                   <a
-                    href={poster.data.posterImage}
+                    href={`${base}${poster.data.posterImage}`}
                     class="poster-image-link"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <div class="poster-thumb-wrap">
                       <img
-                        src={poster.data.posterImage}
+                        src={`${base}${poster.data.posterImage}`}
                         alt={poster.data.title}
                         class="poster-thumb"
                       />
 
                       {poster.data.prize && prizeImages[poster.data.prize] ? (
                         <img
-                          src={prizeImages[poster.data.prize]}
+                          src={`${base}${prizeImages[poster.data.prize]}`}
                           alt={`${poster.data.prize} prize`}
                           class="poster-medal"
                         />
