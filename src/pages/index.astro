@@ -534,7 +534,7 @@ const { hero, theme, keynote, schedule, importantDates, documents, sponsors, foo
               <p class="doc-group-label">{group.group}</p>
               {group.items.map((doc) => (
                 <a
-                  href={doc.href}
+                  href={doc.external ? doc.href : `${base}${doc.href}`}
                   class={`doc-link${doc.external ? ' doc-link-external' : ''}`}
                   target="_blank"
                   rel={doc.external ? 'noopener noreferrer' : ''}
