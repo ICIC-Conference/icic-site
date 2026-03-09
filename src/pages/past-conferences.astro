@@ -83,7 +83,7 @@ const conferences = allConferences.sort((a, b) => b.data.year - a.data.year);
 
     .conference-body {
       display: grid;
-      grid-template-columns: 1fr 200px;
+      grid-template-columns: 1fr 160px;
       gap: 48px;
       align-items: start;
     }
@@ -224,34 +224,7 @@ const conferences = allConferences.sort((a, b) => b.data.year - a.data.year);
                 <p class="conference-description">{conf.data.description}</p>
               )}
 
-              {conf.data.keynotes.length > 0 && (
-                <div>
-                  <p class="keynotes-label">
-                    {conf.data.keynotes.length === 1 ? 'Keynote Speaker' : 'Keynote Speakers'}
-                  </p>
-                  <div class="keynote-list">
-                    {conf.data.keynotes.map((k) => (
-                      <div class={`keynote-item${k.image ? '' : ' no-image'}`}>
-                        {k.image && (
-                          <img
-                            src={`${base}${k.image}`}
-                            alt={k.name}
-                            class="keynote-photo"
-                          />
-                        )}
-                        <div>
-                          <p class="keynote-name">{k.name}</p>
-                          <p class="keynote-role">{k.role}, {k.institution}</p>
-                          {k.talkTitle && (
-                            <p class="keynote-talk">"{k.talkTitle}"</p>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
+                          </div>
 
             {conf.data.posterImage && (
               <div class="poster-wrap">
