@@ -2,6 +2,5 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://icic-conference.github.io',
-  base: '/icic-site',
+  site: 'https://icic.thu.edu.tw',
 });
