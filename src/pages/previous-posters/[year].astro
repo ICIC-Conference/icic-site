@@ -322,7 +322,7 @@ function slugify(str) {
                   >
                     <div class="poster-thumb-wrap">
                       <img
-                        src={`${base}${poster.data.posterImage}`}
+                        src={`${base}${poster.data.posterImage.replace(/\/images\/posters\/(\d+)\//, '/images/posters/$1/thumbnails/')}`}
                         alt={poster.data.title}
                         class="poster-thumb"
                       />
