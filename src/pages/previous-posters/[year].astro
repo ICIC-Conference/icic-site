@@ -287,6 +287,12 @@ function slugify(str) {
         padding: 40px 28px;
       }
     }
+:global(.poster-card.prize-winner) .poster-thumb-wrap {
+  border: 3px solid var(--gold);
+}
+.poster-card {
+  position: relative;
+}
   </style>
 
   <div class="page-body">
@@ -316,7 +322,7 @@ function slugify(str) {
 
             <div class="poster-grid">
               {groupedByCategory[category].map((poster) => (
-                <div class="poster-card">
+                <div class={`poster-card${poster.data.prize ? ' prize-winner' : ''}`}>
                   <a
                     href={`${base}${poster.data.posterImage}`}
                     class="poster-image-link"
