@@ -15,14 +15,14 @@ const conferences = allConferences.sort((a, b) => b.data.year - a.data.year);
     }
 
     .page-hero {
-  background: var(--navy);
-  background-image: url('/images/site/hero-past-conferences.jpg');
-  background-size: cover;
-  background-position: center;
-  padding: 56px 56px 48px;
-  min-height: 220px;
-  position: relative;
-}
+      background: var(--navy);
+      background-image: url('/images/site/hero-past-conferences.jpg');
+      background-size: cover;
+      background-position: center;
+      padding: 56px 56px 48px;
+      min-height: 220px;
+      position: relative;
+    }
 
     .page-hero::before {
       content: '';
@@ -63,22 +63,7 @@ const conferences = allConferences.sort((a, b) => b.data.year - a.data.year);
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--gold);
-      margin: 0 0 10px 0;
-    }
-
-    .conference-theme {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem;
-      font-weight: 600;
-      color: var(--navy);
-      margin: 0 0 20px 0;
-      line-height: 1.25;
-      max-width: 820px;
-    }
-
-    .conference-theme.placeholder {
-      color: var(--rule);
-      font-style: italic;
+      margin: 0 0 16px 0;
     }
 
     .conference-body {
@@ -92,71 +77,26 @@ const conferences = allConferences.sort((a, b) => b.data.year - a.data.year);
       grid-template-columns: 1fr;
     }
 
+    .conference-theme {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 0 0 20px 0;
+      line-height: 1.25;
+    }
+
+    .conference-theme.placeholder {
+      color: var(--rule);
+      font-style: italic;
+    }
+
     .conference-description {
       font-family: 'Source Sans 3', sans-serif;
       font-size: 1rem;
       line-height: 1.75;
       color: var(--text, #2a2a2a);
       font-weight: 300;
-      margin: 0 0 32px 0;
-    }
-
-    .keynotes-label {
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin: 0 0 16px 0;
-    }
-
-    .keynote-list {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .keynote-item {
-      display: grid;
-      grid-template-columns: 64px 1fr;
-      gap: 16px;
-      align-items: start;
-    }
-
-    .keynote-item.no-image {
-      grid-template-columns: 1fr;
-    }
-
-    .keynote-photo {
-      width: 64px;
-      height: 64px;
-      object-fit: cover;
-      border-radius: 2px;
-      display: block;
-    }
-
-    .keynote-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--navy);
-      margin: 0 0 2px 0;
-    }
-
-    .keynote-role {
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 0.85rem;
-      color: var(--muted, #6b6b6b);
-      font-weight: 300;
-      margin: 0 0 4px 0;
-    }
-
-    .keynote-talk {
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 0.88rem;
-      color: var(--navy);
-      font-style: italic;
       margin: 0;
     }
 
@@ -197,7 +137,7 @@ const conferences = allConferences.sort((a, b) => b.data.year - a.data.year);
       }
 
       .poster-wrap {
-        max-width: 280px;
+        max-width: 200px;
       }
     }
   </style>
@@ -212,19 +152,18 @@ const conferences = allConferences.sort((a, b) => b.data.year - a.data.year);
         <div class="conference-entry">
           <p class="conference-year">ICIC {conf.data.year}</p>
 
-          {conf.data.theme ? (
-            <h2 class="conference-theme">{conf.data.theme}</h2>
-          ) : (
-            <h2 class="conference-theme placeholder">Theme to be added</h2>
-          )}
-
           <div class={`conference-body${conf.data.posterImage ? '' : ' no-poster'}`}>
             <div>
+              {conf.data.theme ? (
+                <h2 class="conference-theme">{conf.data.theme}</h2>
+              ) : (
+                <h2 class="conference-theme placeholder">Theme to be added</h2>
+              )}
+
               {conf.data.description && (
                 <p class="conference-description">{conf.data.description}</p>
               )}
-
-                          </div>
+            </div>
 
             {conf.data.posterImage && (
               <div class="poster-wrap">
