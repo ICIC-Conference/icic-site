@@ -12,6 +12,7 @@ const postersCollection = defineCollection({
     posterImage: z.string(),
     videoUrl: z.string().nullable().optional(),
     sortOrder: z.number().optional(),
+    mostLiked: z.boolean().optional(),
   }),
 });
 

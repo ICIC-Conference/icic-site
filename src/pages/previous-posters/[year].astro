@@ -37,7 +37,7 @@ const prizeOrder = ["1st", "2nd", "3rd", "4th", "5th"];
 
 function posterSortKey(p) {
   const divisionRank = p.data.division === "highschool" ? 0 : 1;
-  const prizeRank = p.data.prize ? prizeOrder.indexOf(p.data.prize) : 99;
+  const prizeRank = p.data.prize ? prizeOrder.indexOf(p.data.prize) : (p.data.mostLiked ? 5 : 99);
   const sortOrder = p.data.sortOrder ?? 9999;
   return [divisionRank, prizeRank, sortOrder];
 }
@@ -229,6 +229,13 @@ function slugify(str) {
       z-index: 2;
     }
 
+.poster-medal-secondary {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  height: 48px;
+  z-index: 2;
+}
     .poster-overlay {
       position: absolute;
       inset: 0;
@@ -343,6 +350,14 @@ function slugify(str) {
                           class="poster-medal"
                         />
                       ) : null}
+
+                      {poster.data.mostLiked ? (
+  <img
+    src={`${base}/images/medals/ml.png`}
+    alt="Most Liked"
+    class="poster-medal-secondary"
+  />
+) : null}
 
                       <div class="poster-overlay">
                         <h4>{poster.data.title}</h4>
