@@ -56,23 +56,6 @@ const conferences = allConferences.sort((a, b) => b.data.year - a.data.year);
       border-bottom: none;
     }
 
-    .conference-body {
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 40px;
-  align-items: center;
-}
-
-    .conference-body.no-poster {
-      grid-template-columns: 1fr;
-    }
-
-    .conference-text {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
     .conference-year {
       font-family: 'Source Sans 3', sans-serif;
       font-size: 0.75rem;
@@ -80,20 +63,41 @@ const conferences = allConferences.sort((a, b) => b.data.year - a.data.year);
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--gold);
-      margin: 0 0 12px 0;
+      margin: 0 0 16px 0;
+    }
+
+    .conference-body {
+      display: grid;
+      grid-template-columns: 1fr 160px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .conference-body.no-poster {
+      grid-template-columns: 1fr;
     }
 
     .conference-theme {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--navy);
-  margin: 0;
-  line-height: 1.4;
-}
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 0 0 20px 0;
+      line-height: 1.25;
+    }
+
     .conference-theme.placeholder {
       color: var(--rule);
       font-style: italic;
+    }
+
+    .conference-description {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text, #2a2a2a);
+      font-weight: 300;
+      margin: 0;
     }
 
     .poster-wrap {
@@ -146,7 +150,19 @@ const conferences = allConferences.sort((a, b) => b.data.year - a.data.year);
     <div class="content-section">
       {conferences.map((conf) => (
         <div class="conference-entry">
+          <p class="conference-year">ICIC {conf.data.year}</p>
+
           <div class={`conference-body${conf.data.posterImage ? '' : ' no-poster'}`}>
+            <div>
+              {conf.data.theme ? (
+                <h2 class="conference-theme">{conf.data.theme}</h2>
+              ) : (
+                <h2 class="conference-theme placeholder">Theme to be added</h2>
+              )}
+
+          
+            </div>
+
             {conf.data.posterImage && (
               <div class="poster-wrap">
                 <a
@@ -164,15 +180,6 @@ const conferences = allConferences.sort((a, b) => b.data.year - a.data.year);
                 <p class="poster-caption">Conference poster — click to view full size</p>
               </div>
             )}
-
-            <div class="conference-text">
-              <p class="conference-year">ICIC {conf.data.year}</p>
-              {conf.data.theme ? (
-                <h2 class="conference-theme">{conf.data.theme}</h2>
-              ) : (
-                <h2 class="conference-theme placeholder">Theme to be added</h2>
-              )}
-            </div>
           </div>
         </div>
       ))}
