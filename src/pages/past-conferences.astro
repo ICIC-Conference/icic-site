@@ -160,7 +160,9 @@ const conferences = allConferences.sort((a, b) => b.data.year - a.data.year);
                 <h2 class="conference-theme placeholder">Theme to be added</h2>
               )}
 
-          
+          {conf.data.description && (
+  <p class="conference-description">{conf.data.description}</p>
+)}
             </div>
 
             {conf.data.posterImage && (
