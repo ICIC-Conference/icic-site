@@ -25,6 +25,8 @@ const divisionLabels = {
   highschool: "High School",
 };
 
+const heroImage = posters[0]?.data.heroImage ?? '/images/site/hero-posters.jpg';
+
 const prizeImages = {
   "1st": "/images/medals/1st.png",
   "2nd": "/images/medals/2nd.png",
@@ -305,7 +307,7 @@ function slugify(str) {
   </style>
 
   <div class="page-body">
-    <div class="page-hero" id="top" style={`background-image: url('${base}/images/site/hero-posters.jpg')`}>
+    <div class="page-hero" id="top" style={`background-image: url('${base}${heroImage}')`}>
       <h2>Posters – {year}</h2>
     </div>
 
