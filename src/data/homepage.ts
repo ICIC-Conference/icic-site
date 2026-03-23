@@ -23,11 +23,11 @@ const homepageData = {
 
   schedule: [
   {
-    time: "08:45–09:25",
+    time: "08:45–09:10",
     columns: [{ width: "1fr", blocks: [{ title: "Registration", location: null }] }],
   },
   {
-    time: "09:30–10:10",
+    time: "09:10–10:10",
     columns: [{ width: "1fr", blocks: [{ title: "Poster Session 1", location: null }] }],
   },
   {
