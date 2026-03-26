@@ -82,13 +82,28 @@ const conferences = allConferences.sort((a, b) => b.data.year - a.data.year);
       font-size: 2rem;
       font-weight: 600;
       color: var(--navy);
-      margin: 0 0 20px 0;
+      margin: 0 0 12px 0;
       line-height: 1.25;
     }
 
     .conference-theme.placeholder {
       color: var(--rule);
       font-style: italic;
+    }
+
+    .program-link {
+      display: inline-block;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gold);
+      text-decoration: none;
+      margin: 0 0 20px 0;
+      letter-spacing: 0.02em;
+    }
+
+    .program-link:hover {
+      color: var(--navy);
     }
 
     .conference-description {
@@ -160,9 +175,13 @@ const conferences = allConferences.sort((a, b) => b.data.year - a.data.year);
                 <h2 class="conference-theme placeholder">Theme to be added</h2>
               )}
 
-          {conf.data.description && (
-  <p class="conference-description">{conf.data.description}</p>
-)}
+              {conf.data.programPdf && (
+                <a href={`${base}${conf.data.programPdf}`} target="_blank" rel="noopener noreferrer" class="program-link">Conference Program</a>
+              )}
+
+              {conf.data.description && (
+                <p class="conference-description">{conf.data.description}</p>
+              )}
             </div>
 
             {conf.data.posterImage && (

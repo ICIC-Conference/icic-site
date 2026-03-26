@@ -24,12 +24,14 @@ const conferencesCollection = defineCollection({
     theme: z.string().nullable(),
     description: z.string().nullable(),
     posterImage: z.string().nullable(),
+    programPdf: z.string().nullable().optional(),
     keynotes: z.array(z.object({
       name: z.string(),
       institution: z.string(),
       role: z.string(),
       talkTitle: z.string().nullable(),
       image: z.string().nullable(),
+      
     })),
   }),
 });
