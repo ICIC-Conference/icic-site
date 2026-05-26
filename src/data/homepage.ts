@@ -24,48 +24,56 @@ const homepageData = {
   schedule: [
   {
     time: "08:45–09:10",
-    columns: [{ width: "1fr", blocks: [{ title: "Registration", location: null }] }],
+    columns: [{ width: "1fr", blocks: [{ title: "Registration", location: 'M244' }] }],
   },
   {
-    time: "09:10–10:10",
-    columns: [{ width: "1fr", blocks: [{ title: "Poster Session 1", location: null }] }],
-  },
+  time: "09:10–10:10",
+  columns: [
+      { width: "1fr", blocks: [{ title: "Oral Session 1-A", location: 'M145' }] },
+    { width: "1fr", blocks: [{ title: "Oral Session 1-B", location: 'M146' }] },
+      { width: "1fr", blocks: [{ title: "Poster Session 1", location: 'M232 & M233' }] },
+  ],
+},
   {
     time: "10:10–10:30",
-    columns: [{ width: "1fr", blocks: [{ title: "Coffee Break", location: null }] }],
+    columns: [{ width: "1fr", blocks: [{ title: "Morning Tea", location: 'M232 & M233' }] }],
   },
   {
-    time: "10:30–12:30",
-    columns: [{ width: "1fr", blocks: [{ title: "Oral Sessions 1", location: null }] }],
-  },
+  time: "10:30–12:30",
+  columns: [
+    { width: "1fr", blocks: [{ title: "Oral Sessions 2-A", location: 'M145' }] },
+    { width: "1fr", blocks: [{ title: "Oral Sessions 2-B", location: 'M146' }] },
+  ],
+},
   {
     time: "12:30–1:30",
-    columns: [{ width: "1fr", blocks: [{ title: "Lunch", location: null }] }],
+    columns: [{ width: "1fr", blocks: [{ title: "Lunch", location: 'M232 & M233' }] }],
   },
   {
-    time: "1:30–3:30",
-    columns: [
-      { width: "1fr", blocks: [{ title: "Oral Sessions 2", location: null }] },
-      {
-        width: "1fr",
-        blocks: [
-          { title: "Program Introduction Session", location: null },
-          { title: "Poster Session 2", location: null },
-        ],
-      },
-    ],
-  },
+  time: "1:30–3:30",
+  columns: [
+    { width: "1fr", blocks: [{ title: "Oral Sessions 3-A", location: 'M145' }] },
+    { width: "1fr", blocks: [{ title: "Oral Sessions 3-B", location: 'M146' }] },
+    {
+      width: "1fr",
+      blocks: [
+        { title: "Program Introduction Session", location: 'M244' },
+        { title: "Poster Session 2", location: 'M232 & M233' },
+      ],
+    },
+  ],
+},
   {
     time: "3:30–4:00",
-    columns: [{ width: "1fr", blocks: [{ title: "Coffee Break", location: null }] }],
+    columns: [{ width: "1fr", blocks: [{ title: "Afternoon Tea", location: 'M232 & M233' }] }],
   },
   {
     time: "4:00–5:00",
-    columns: [{ width: "1fr", blocks: [{ title: "Keynote Address", talkTitle: "Unlocking Brain Potential: What and How to Learn in the AI Era", speaker: "Chi-Hung Juan, Chair Professor and Executive Vice President (National Central University)", location: null }] }],
+    columns: [{ width: "1fr", blocks: [{ title: "Keynote Address", talkTitle: "Unlocking Brain Potential: What and How to Learn in the AI Era", speaker: "Chi-Hung Juan, Chair Professor and Executive Vice President (National Central University)", location: 'M201' }] }],
   },
   {
     time: "5:00–5:30",
-    columns: [{ width: "1fr", blocks: [{ title: "Awards and Closing", location: null }] }],
+    columns: [{ width: "1fr", blocks: [{ title: "Awards and Closing", location: 'M201' }] }],
   },
 ],
 
