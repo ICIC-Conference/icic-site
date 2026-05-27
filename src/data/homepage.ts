@@ -106,15 +106,16 @@ const homepageData = {
   {
     group: "Oral Presentations",
     items: [
+      // { label: "Submit an Oral Presentation Proposal", href: "https://forms.gle/LEwj9x1rUFDZZgff7", external: true },
       { label: "Oral Presentations Schedule", href: "/documents/ICIC2026 Draft Conference Schedule.pdf"},
       { label: "Oral Presentations Abstracts", href: "/documents/Oral Presentations Abstracts.pdf"},
-      { label: "Presentation Schedule", href: "/documents/ICIC schedule.pdf" },
       { label: "Abstracts", href: "/documents/ICIC abstracts.pdf" },
     ],
   },
   {
     group: "Poster Presentations",
     items: [
+      //{ label: "Submit a Poster Presentation Proposal", href: "https://forms.gle/ykdUsYnfrtq8CUsA9", external: true },
       { label: "Poster Presentations Abstracts", href: "/documents/poster abstracts.pdf"},
       { label: "Poster Presentation Fact Sheet", href: "/documents/poster fact sheet.pdf" },
       { label: "Poster Judging Criteria", href: "/documents/judging criteria.pdf" },
