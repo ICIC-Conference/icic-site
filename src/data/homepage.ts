@@ -100,7 +100,7 @@ const homepageData = {
   {
     group: "General",
     items: [
-      { label: "Campus Map", href: "/documents/map.pdf" },
+      { label: "Campus/Event Map", href: "/documents/Maps.pdf" },
     ],
   },
   {
