@@ -1,0 +1,401 @@
+--- ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Poster Submission — ICIC 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=DM+Sans:wght@300;400;500&display=swap');
+
+    :root {
+      --bg: #f7f4ef;
+      --card: #ffffff;
+      --text: #1a1a1a;
+      --muted: #6b6560;
+      --accent: #8b3a2a;
+      --accent-light: #f0e8e5;
+      --border: #ddd9d2;
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 540px;
+    }
+
+    .header {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .header .conference {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .header h1 {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 2.5rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .step-indicator {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 1.8rem;
+      justify-content: center;
+    }
+
+    .step-dot {
+      width: 28px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--border);
+      transition: background 0.3s;
+    }
+
+    .step-dot.active { background: var(--accent); }
+    .step-dot.done { background: #b5c4a8; }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    .notice {
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 4px 4px 0;
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.88rem;
+      color: var(--accent);
+      line-height: 1.5;
+    }
+
+    .question {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      margin-bottom: 1.4rem;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.65rem 1.4rem;
+      transition: all 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover { background: #722f22; }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover { background: var(--bg); }
+
+    select {
+      width: 100%;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.65rem 0.9rem;
+      margin-bottom: 1.4rem;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6560' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.9rem center;
+      cursor: pointer;
+    }
+
+    select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+    .dead-end {
+      text-align: center;
+      padding: 0.5rem 0;
+    }
+
+    .dead-end .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .dead-end h2 {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    .dead-end p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+
+    .dead-end a {
+      color: var(--accent);
+      text-decoration: underline;
+      font-size: 0.85rem;
+    }
+
+    .success {
+      text-align: center;
+      padding: 0.5rem 0;
+    }
+
+    .success .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .success h2 {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .success p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1.4rem;
+    }
+
+    .footer {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="conference">ICIC 2026 · Poster Submission</div>
+    <h1>Seventy Years Forward</h1>
+  </div>
+
+  <div class="card">
+    <div class="step-indicator">
+      <div class="step-dot active" id="dot-1"></div>
+      <div class="step-dot" id="dot-2"></div>
+      <div class="step-dot" id="dot-3"></div>
+    </div>
+
+    <!-- PAGE 1: Are you a mini-semester student? -->
+    <div class="page active" id="page-1">
+      <div class="notice">
+        The abstract submission period for general poster submissions has closed.
+        Submission is currently only open for mini-semester students.
+      </div>
+      <div class="question">Are you a mini-semester student?</div>
+      <div class="btn-group">
+        <button class="btn-primary" onclick="goPage(2)">Yes</button>
+        <button class="btn-secondary" onclick="goDeadEnd('not-mini')">No</button>
+      </div>
+    </div>
+
+    <!-- PAGE 2: Which course? -->
+    <div class="page" id="page-2">
+      <div class="question">Which course are you taking?</div>
+      <select id="course-select">
+        <option value="">— Select your course —</option>
+        <option value="apples">Apples and Oranges: How to Build an Empire</option>
+        <option value="business-chinese">Business Chinese (for Non-Native Speakers)</option>
+        <option value="comics">Comics as Communication and Practice</option>
+        <option value="consumer">Consumer Behavior</option>
+        <option value="esports">Esports, Speedrunning, and Video Games</option>
+        <option value="climate">Introduction to Climate Justice</option>
+        <option value="ai">Introduction to AI for Non Programmers</option>
+        <option value="mandarin">Mandarin for Daily Use</option>
+        <option value="movies">Mind-Changing Movies: Family Issues and Environmental Ethics</option>
+        <option value="music">Music Appreciation: Chinese, Taiwanese, and Western Music</option>
+        <option value="politics">The International Politics of Money</option>
+        <option value="tea">Taiwanese Tea Culture and Tea Ceremony Aesthetics</option>
+      </select>
+      <div class="btn-group">
+        <button class="btn-primary" onclick="goPage3()">Next</button>
+        <button class="btn-secondary" onclick="goPage(1)">Back</button>
+      </div>
+    </div>
+
+    <!-- PAGE 3: Who is your instructor? -->
+    <div class="page" id="page-3">
+      <div class="question">Who is your instructor?</div>
+      <select id="instructor-select">
+        <option value="">— Select your instructor —</option>
+        <option value="cairns">Jon Cairns</option>
+        <option value="chang">Yevvon Yi-Chi Chang</option>
+        <option value="chung">Han Wei Chung</option>
+        <option value="hemmingsen">Michael Hemmingsen</option>
+        <option value="hsieh-meyers">Jocelyn Hsieh-Meyers</option>
+        <option value="kingsbury">Karen S. Kingsbury</option>
+        <option value="lanteigne">Marc Lanteigne</option>
+        <option value="lee">Jessie Lee</option>
+        <option value="leifer">Jack Leifer</option>
+        <option value="mikulewicz">Michael Mikulewicz</option>
+        <option value="wang">Pei-I Wang</option>
+      </select>
+      <div class="btn-group">
+        <button class="btn-primary" onclick="checkMatch()">Submit</button>
+        <button class="btn-secondary" onclick="goPage(2)">Back</button>
+      </div>
+    </div>
+
+    <!-- DEAD END: Not a mini-semester student -->
+    <div class="page" id="page-not-mini">
+      <div class="dead-end">
+        <span class="icon">🔒</span>
+        <h2>Submission is closed</h2>
+        <p>The general poster submission period has ended. If you believe you have received this link in error, please contact the conference organizers.</p>
+        <a href="https://icic.thu.edu.tw">Return to ICIC 2026</a>
+      </div>
+    </div>
+
+    <!-- DEAD END: Wrong match -->
+    <div class="page" id="page-mismatch">
+      <div class="dead-end">
+        <span class="icon">⚠️</span>
+        <h2>We couldn't verify your enrollment</h2>
+        <p>The course and instructor you selected don't match our records. Please double-check your course information and try again, or contact your instructor directly.</p>
+        <button class="btn-secondary" style="margin-top:0.5rem" onclick="goPage(1)">Start over</button>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="page" id="page-success">
+      <div class="success">
+        <span class="icon">✅</span>
+        <h2>Verified — redirecting you now</h2>
+        <p>Taking you to the poster submission form…</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">ICIC 2026 · Tunghai University International College</div>
+</div>
+
+<script is:inline>
+  // Course → correct instructor mapping
+  const mapping = {
+    apples:          'chung',
+    'business-chinese': 'hsieh-meyers',
+    comics:          'cairns',
+    consumer:        'chang',
+    esports:         'hemmingsen',
+    climate:         'mikulewicz',
+    ai:              'leifer',
+    mandarin:        'lee',
+    movies:          'kingsbury',
+    music:           'wang',
+    politics:        'lanteigne',
+    tea:             'chang',
+  };
+
+  const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdr9KyAUz2tvXzQJGvRhd5uozPRf4tNzPcwrJmi8SjbxjG9Xg/viewform?usp=header';
+
+  function goPage(n) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + n).classList.add('active');
+    updateDots(n);
+  }
+
+  function goDeadEnd(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    updateDots(0);
+  }
+
+  function updateDots(active) {
+    for (let i = 1; i <= 3; i++) {
+      const dot = document.getElementById('dot-' + i);
+      dot.classList.remove('active', 'done');
+      if (i < active) dot.classList.add('done');
+      else if (i === active) dot.classList.add('active');
+    }
+  }
+
+  function goPage3() {
+    const course = document.getElementById('course-select').value;
+    if (!course) { alert('Please select your course.'); return; }
+    goPage(3);
+  }
+
+  function checkMatch() {
+    const course = document.getElementById('course-select').value;
+    const instructor = document.getElementById('instructor-select').value;
+    if (!instructor) { alert('Please select your instructor.'); return; }
+
+    if (mapping[course] === instructor) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page-success').classList.add('active');
+      updateDots(0);
+      setTimeout(() => { window.location.href = FORM_URL; }, 1800);
+    } else {
+      goDeadEnd('mismatch');
+    }
+  }
+</script>
+
+</body>
+</html>
