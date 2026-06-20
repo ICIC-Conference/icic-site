@@ -3,7 +3,7 @@ import MainLayout from "../layouts/MainLayout.astro";
 import homepageData from "../data/homepage";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const { hero, theme, keynote, schedule, importantDates, documents, sponsors, footer } = homepageData;
+const { hero, theme, keynote, schedule, speakerSchedule, importantDates, documents, sponsors, footer } = homepageData;
 ---
 
 <MainLayout title="ICIC 2026">
@@ -97,6 +97,37 @@ const { hero, theme, keynote, schedule, importantDates, documents, sponsors, foo
       background: var(--cream);
       font-family: 'Source Sans 3', sans-serif;
       color: var(--text);
+    }
+
+    /* Program announcement banner */
+    .cfp-banner {
+      background: var(--cream);
+      border-bottom: 1px solid var(--rule);
+      padding: 22px 56px;
+      text-align: center;
+    }
+
+    .cfp-lede {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-style: italic;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 0;
+      letter-spacing: 0.01em;
+    }
+
+    .cfp-lede a {
+      color: var(--navy);
+      text-decoration: underline;
+      text-decoration-color: var(--gold);
+      text-underline-offset: 3px;
+      font-weight: 600;
+      transition: color 0.15s;
+    }
+
+    .cfp-lede a:hover {
+      color: var(--gold);
     }
 
     .section {
@@ -296,6 +327,122 @@ const { hero, theme, keynote, schedule, importantDates, documents, sponsors, foo
       color: var(--muted);
     }
 
+    /* Speaker Schedule */
+    .speaker-schedule-section { background: var(--cream); }
+
+    .speaker-time-group {
+      margin-bottom: 44px;
+    }
+
+    .speaker-time-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .speaker-time-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin: 0 0 20px 0;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .speaker-time-heading .time {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .speaker-sessions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .speaker-session {
+      background: var(--white);
+      border: 1px solid var(--rule);
+    }
+
+    .speaker-session-header {
+      padding: 16px 22px;
+      background: var(--navy);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .speaker-session-header .session-label {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .speaker-session-header .session-location {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.78rem;
+      color: var(--gold-light);
+      letter-spacing: 0.05em;
+    }
+
+    .speaker-session-chair {
+      padding: 10px 22px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.85rem;
+      color: var(--muted);
+      border-bottom: 1px solid var(--rule);
+      background: #f0ede6;
+    }
+
+    .speaker-session-chair strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .speaker-papers {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .speaker-paper {
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .speaker-paper:last-child {
+      border-bottom: none;
+    }
+
+    .speaker-paper-name {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 0;
+    }
+
+    .speaker-paper-affiliation {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 400;
+      margin: 2px 0 0 0;
+    }
+
+    .speaker-paper-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.02rem;
+      color: var(--text);
+      line-height: 1.5;
+      margin: 8px 0 0 0;
+    }
+
     .dates-docs-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -419,6 +566,8 @@ const { hero, theme, keynote, schedule, importantDates, documents, sponsors, foo
       .schedule-row { grid-template-columns: 100px 1fr; }
       .dates-docs-grid { grid-template-columns: 1fr; gap: 32px; }
       .sponsors-section { padding: 40px 28px; }
+      .cfp-banner { padding: 14px 28px; }
+      .speaker-sessions-grid { grid-template-columns: 1fr; gap: 24px; }
     }
 
     @media (max-width: 560px) {
@@ -432,6 +581,8 @@ const { hero, theme, keynote, schedule, importantDates, documents, sponsors, foo
         border-bottom: 1px solid var(--rule);
         padding: 12px 20px;
       }
+
+      .cfp-lede { font-size: 1.2rem; }
     }
   </style>
 
@@ -450,6 +601,11 @@ const { hero, theme, keynote, schedule, importantDates, documents, sponsors, foo
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- Program Announcement -->
+    <section class="cfp-banner">
+      <p class="cfp-lede">The full conference program is now available <a href={`${base}/documents/ICIC2026-Conference-Program.pdf`} target="_blank" rel="noopener noreferrer">here</a>.</p>
     </section>
 
     <!-- Theme -->
@@ -510,6 +666,43 @@ const { hero, theme, keynote, schedule, importantDates, documents, sponsors, foo
           </div>
         ))}
       </div>
+    </section>
+
+    <!-- Speaker Schedule -->
+    <section class="section speaker-schedule-section">
+      <p class="section-label">Oral Presentations</p>
+      <h2>Speaker Schedule</h2>
+
+      {speakerSchedule.map((group) => (
+        <div class="speaker-time-group">
+          <div class="speaker-time-heading">
+            <span class="time">{group.time}</span>
+          </div>
+
+          <div class="speaker-sessions-grid">
+            {group.sessions.map((session) => (
+              <div class="speaker-session">
+                <div class="speaker-session-header">
+                  <span class="session-label">{session.label}</span>
+                  <span class="session-location">{session.location}</span>
+                </div>
+                <div class="speaker-session-chair">
+                  <strong>Chair:</strong> {session.chair}
+                </div>
+                <div class="speaker-papers">
+                  {session.papers.map((paper) => (
+                    <div class="speaker-paper">
+                      <p class="speaker-paper-name">{paper.speaker}</p>
+                      <p class="speaker-paper-affiliation">{paper.affiliation}</p>
+                      <p class="speaker-paper-title">&ldquo;{paper.title}&rdquo;</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
     </section>
 
     <!-- Dates & Docs -->
