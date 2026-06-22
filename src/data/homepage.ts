@@ -100,29 +100,175 @@ const homepageData = {
   {
     group: "General",
     items: [
+      { label: "Conference Program", href: "/documents/ICIC2026-Conference-Program.pdf" },
       { label: "Campus/Event Map", href: "/documents/Maps.pdf" },
     ],
   },
   {
-    group: "Oral Presentations",
+    //group: "Oral Presentations",
     items: [
       // { label: "Submit an Oral Presentation Proposal", href: "https://forms.gle/LEwj9x1rUFDZZgff7", external: true },
-      { label: "Oral Presentations Schedule", href: "/documents/ICIC2026 Draft Conference Schedule.pdf"},
-      { label: "Oral Presentations Abstracts", href: "/documents/Oral Presentations Abstracts.pdf"},
-      { label: "Abstracts", href: "/documents/ICIC abstracts.pdf" },
+      //{ label: "Oral Presentations Schedule", href: "/documents/ICIC2026 Draft Conference Schedule.pdf"},
+      //{ label: "Oral Presentations Abstracts", href: "/documents/Oral Presentations Abstracts.pdf"},
+      //{ label: "Abstracts", href: "/documents/ICIC abstracts.pdf" },
     ],
   },
   {
     group: "Poster Presentations",
     items: [
       //{ label: "Submit a Poster Presentation Proposal", href: "https://forms.gle/ykdUsYnfrtq8CUsA9", external: true },
-      { label: "Poster Presentations Abstracts", href: "/documents/poster abstracts.pdf"},
+     // { label: "Poster Presentations Abstracts", href: "/documents/poster abstracts.pdf"},
       { label: "Poster Presentation Fact Sheet", href: "/documents/poster fact sheet.pdf" },
       { label: "Poster Judging Criteria", href: "/documents/judging criteria.pdf" },
-      { label: "Sample Authorization Sheet", href: "/documents/authorization sheet sample.pdf" },
+      //{ label: "Sample Authorization Sheet", href: "/documents/authorization sheet sample.pdf" },
     ],
   },
 ],
+
+  speakerSchedule: [
+    {
+      time: "09:10–10:10",
+      sessions: [
+        {
+          label: "Session 1-A",
+          location: "M145",
+          chair: "Makiko Yurita",
+          papers: [
+            {
+              speaker: "Aining Hsieh",
+              affiliation: "National Chi Nan University",
+              title: "Trend Changes in Southeast Asian-Themed Content on Public Television Service (2001–2024)",
+            },
+            {
+              speaker: "Kai Wah Hen",
+              affiliation: "Universiti Tunku Abdul Rahman",
+              title: "Cross-Border E-Commerce in Southeast Asia: A Qualitative Study of Challenges and Opportunities for Taiwanese Merchants",
+            },
+          ],
+        },
+        {
+          label: "Session 1-B",
+          location: "M146",
+          chair: "Moiyen Zalal Chowdhury",
+          papers: [
+            {
+              speaker: "Iljoon Park",
+              affiliation: "Wongkwang University",
+              title: "General Education for Nonhumans: From an Extended Viewpoint of Humankind",
+            },
+            {
+              speaker: "Lucas Scripter",
+              affiliation: "The Hong Kong Polytechnic University",
+              title: "Animal Grief and Meaning in Human and Other Animal Lives",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      time: "10:30–12:30",
+      sessions: [
+        {
+          label: "Session 2-A",
+          location: "M145",
+          chair: "Subashini K. Rajanthran",
+          papers: [
+            {
+              speaker: "Michael Mikulewicz",
+              affiliation: "State University of New York ESF",
+              title: "NOT At All Costs: Climate Justice, Democracy, and the Promise of Liberal Education",
+            },
+            {
+              speaker: "Jessica Sze Yin Ho",
+              affiliation: "Heriot-Watt University",
+              title: "From Learning to Impact: Connecting Teaching, Research, and Real-World Relevance",
+            },
+            {
+              speaker: "Julien Paret",
+              affiliation: "Alliance University",
+              title: "Learning to Flow: Liberal Arts Education and the Formation of Adaptive Strategists in a World in Motion",
+            },
+          ],
+        },
+        {
+          label: "Session 2-B",
+          location: "M146",
+          chair: "Imed Nsiri",
+          papers: [
+            {
+              speaker: "Marc Lanteigne",
+              affiliation: "Arctic University of Norway",
+              title: "Critical Theory and Political Science: \u2018Radical\u2019 Views from the Arctic",
+            },
+            {
+              speaker: "Svitlana Kosolapova",
+              affiliation: "Tzu Chi University",
+              title: "Reading War Across Contexts: Feminist Film Analysis and Global Visual Literacy in Ukrainian Cinema",
+            },
+            {
+              speaker: "Moiyen Zalal Chowdhury",
+              affiliation: "BRAC University",
+              title: "Visible Bodies, Invisible Power: Gender, Protest, and the Politics of Legitimacy in Bangladesh\u2019s July 2024 Uprising",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      time: "1:30–3:30",
+      sessions: [
+        {
+          label: "Session 3-A",
+          location: "M145",
+          chair: "Jessica Sze Yin Ho",
+          papers: [
+            {
+              speaker: "Makiko Yurita",
+              affiliation: "National Institute for School Teachers and Staff Development",
+              title: "Beyond Instrumental Utility: Reframing Empowerment through the Mode of Being in Liberal Arts and Bilingual Education",
+            },
+            {
+              speaker: "Krystie Wills",
+              affiliation: "American University of Sharjah",
+              title: "Building ESL Students\u2019 Presentation Skills While Leveraging GAI and PB",
+            },
+            {
+              speaker: "Yulis",
+              affiliation: "National Chung Hsing University",
+              title: "Building Bilingual Environment in Taiwan: Bridging Policy and Practice in Public Education",
+            },
+            {
+              speaker: "Imed Nsiri",
+              affiliation: "American University of Sharjah",
+              title: "Arab Heritage in an English Language Context",
+            },
+          ],
+        },
+        {
+          label: "Session 3-B",
+          location: "M146",
+          chair: "Julien Paret",
+          papers: [
+            {
+              speaker: "Priyanka C. Bhatt",
+              affiliation: "Yuan Ze University",
+              title: "Designing EMI Business and Technology\u2013Oriented Courses in the Age of AI: Pedagogical Strategies from Multilingual Classrooms",
+            },
+            {
+              speaker: "Subashini K. Rajanthran",
+              affiliation: "University of the Arts Singapore",
+              title: "Curiosity, Creativity, Criticality: An AI-Resilient Framework for English-Medium Higher Arts Education",
+            },
+            {
+              speaker: "Fatiha Nesrine Bouzid",
+              affiliation: "Independent Scholar",
+              title: "My True Voice: Artificial Intelligence as a Bridge for Identity and the Empowerment of Sovereign Consciousness (F) in Liberal Education",
+            },
+          ],
+        },
+      ],
+    },
+  ],
 
   sponsors: [
     {

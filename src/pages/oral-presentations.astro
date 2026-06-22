@@ -1,5 +1,8 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+import homepageData from "../data/homepage";
+
+const { speakerSchedule } = homepageData;
 ---
 
 <MainLayout title="Oral Presentations">
@@ -211,6 +214,134 @@ import MainLayout from "../layouts/MainLayout.astro";
       margin-top: 2px;
     }
 
+    /* Speaker Schedule */
+    .speaker-schedule-section {
+      border-top: 1px solid var(--rule);
+      padding-top: 48px;
+      margin-top: 48px;
+    }
+
+    .speaker-schedule-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 0 0 28px 0;
+    }
+
+    .speaker-time-group {
+      margin-bottom: 44px;
+    }
+
+    .speaker-time-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .speaker-time-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin: 0 0 20px 0;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .speaker-time-heading .time {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .speaker-sessions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .speaker-session {
+      background: var(--white);
+      border: 1px solid var(--rule);
+    }
+
+    .speaker-session-header {
+      padding: 16px 22px;
+      background: var(--navy);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .speaker-session-header .session-label {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .speaker-session-header .session-location {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.78rem;
+      color: var(--gold-light);
+      letter-spacing: 0.05em;
+    }
+
+    .speaker-session-chair {
+      padding: 10px 22px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.85rem;
+      color: var(--muted);
+      border-bottom: 1px solid var(--rule);
+      background: #f0ede6;
+    }
+
+    .speaker-session-chair strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .speaker-papers {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .speaker-paper {
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .speaker-paper:last-child {
+      border-bottom: none;
+    }
+
+    .speaker-paper-name {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 0;
+    }
+
+    .speaker-paper-affiliation {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 400;
+      margin: 2px 0 0 0;
+    }
+
+    .speaker-paper-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.02rem;
+      color: var(--text);
+      line-height: 1.5;
+      margin: 8px 0 0 0;
+    }
+
     /* Closing */
     .closing-note {
       border-top: 1px solid var(--rule);
@@ -271,9 +402,14 @@ import MainLayout from "../layouts/MainLayout.astro";
       }
 
       .info-section,
-      .participants-grid {
+      .participants-grid,
+      .speaker-sessions-grid {
         grid-template-columns: 1fr;
         gap: 32px;
+      }
+
+      .speaker-sessions-grid {
+        gap: 24px;
       }
 
       .closing-note {
@@ -291,8 +427,7 @@ import MainLayout from "../layouts/MainLayout.astro";
 
     <div class="content-section">
 
-      <p class="cfp-lede">A draft schedule for the oral presentations is now available <a href="/documents/ICIC2026 Draft Conference Schedule.pdf">here</a>.</p>
-      <p class="cfp-lede">Abstracts for the talks can be found <a href="/documents/Oral Presentations Abstracts.pdf">here</a>.</p>
+      <p class="cfp-lede">The full conference program is now available <a href="/documents/ICIC2026-Conference-Program.pdf">here</a>.</p>
 
       <div class="intro">
         <p>
@@ -361,6 +496,41 @@ import MainLayout from "../layouts/MainLayout.astro";
             </ul>
           </div>
         </div>
+      </div>
+
+      <div class="speaker-schedule-section">
+        <h2>Speaker Schedule</h2>
+
+        {speakerSchedule.map((group) => (
+          <div class="speaker-time-group">
+            <div class="speaker-time-heading">
+              <span class="time">{group.time}</span>
+            </div>
+
+            <div class="speaker-sessions-grid">
+              {group.sessions.map((session) => (
+                <div class="speaker-session">
+                  <div class="speaker-session-header">
+                    <span class="session-label">{session.label}</span>
+                    <span class="session-location">{session.location}</span>
+                  </div>
+                  <div class="speaker-session-chair">
+                    <strong>Chair:</strong> {session.chair}
+                  </div>
+                  <div class="speaker-papers">
+                    {session.papers.map((paper) => (
+                      <div class="speaker-paper">
+                        <p class="speaker-paper-name">{paper.speaker}</p>
+                        <p class="speaker-paper-affiliation">{paper.affiliation}</p>
+                        <p class="speaker-paper-title">&ldquo;{paper.title}&rdquo;</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
 
       <div class="closing-note">
