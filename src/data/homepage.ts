@@ -22,108 +22,86 @@ const homepageData = {
   },
 
   schedule: [
-  {
-    time: "08:45–09:10",
-    columns: [{ width: "1fr", blocks: [{ title: "Registration", location: 'M244' }] }],
-  },
-  {
-  time: "09:10–10:10",
-  columns: [
-      { width: "1fr", blocks: [{ title: "Oral Session 1-A", location: 'M145' }] },
-    { width: "1fr", blocks: [{ title: "Oral Session 1-B", location: 'M146' }] },
-      { width: "1fr", blocks: [{ title: "Poster Session 1", location: 'M232 & M233' }] },
-  ],
-},
-  {
-    time: "10:10–10:30",
-    columns: [{ width: "1fr", blocks: [{ title: "Morning Tea", location: 'M232 & M233' }] }],
-  },
-  {
-  time: "10:30–12:30",
-  columns: [
-    { width: "1fr", blocks: [{ title: "Oral Sessions 2-A", location: 'M145' }] },
-    { width: "1fr", blocks: [{ title: "Oral Sessions 2-B", location: 'M146' }] },
-  ],
-},
-  {
-    time: "12:30–1:30",
-    columns: [{ width: "1fr", blocks: [{ title: "Lunch", location: 'M232 & M233' }] }],
-  },
-  {
-  time: "1:30–3:30",
-  columns: [
-    { width: "1fr", blocks: [{ title: "Oral Sessions 3-A", location: 'M145' }] },
-    { width: "1fr", blocks: [{ title: "Oral Sessions 3-B", location: 'M146' }] },
     {
-      width: "1fr",
-      blocks: [
-        { title: "Program Introduction Session", location: 'M244' },
-        { title: "Poster Session 2", location: 'M232 & M233' },
+      time: "08:45–09:10",
+      columns: [{ width: "1fr", blocks: [{ title: "Registration", location: "M244" }] }],
+    },
+    {
+      time: "09:10–10:10",
+      columns: [
+        { width: "1fr", blocks: [{ title: "Oral Session 1-A", location: "M145" }] },
+        { width: "1fr", blocks: [{ title: "Poster Session 1", location: "M232 & M233" }] },
       ],
     },
+    {
+      time: "10:10–10:30",
+      columns: [{ width: "1fr", blocks: [{ title: "Morning Tea", location: "M232 & M233" }] }],
+    },
+    {
+      time: "10:30–12:30",
+      columns: [
+        { width: "1fr", blocks: [{ title: "Oral Sessions 2-A", location: "M145" }] },
+        { width: "1fr", blocks: [{ title: "Oral Sessions 2-B", location: "M146" }] },
+      ],
+    },
+    {
+      time: "12:30–1:30",
+      columns: [{ width: "1fr", blocks: [{ title: "Lunch", location: "M232 & M233" }] }],
+    },
+    {
+      time: "1:30–3:30",
+      columns: [
+        { width: "1fr", blocks: [{ title: "Oral Sessions 3-A", location: "M145" }] },
+        { width: "1fr", blocks: [{ title: "Oral Sessions 3-B", location: "M146" }] },
+        {
+          width: "1fr",
+          blocks: [
+            { title: "Program Introduction Session", location: "M244" },
+            { title: "Poster Session 2", location: "M232 & M233" },
+          ],
+        },
+      ],
+    },
+    {
+      time: "3:30–4:00",
+      columns: [{ width: "1fr", blocks: [{ title: "Afternoon Tea", location: "M232 & M233" }] }],
+    },
+    {
+      time: "4:00–5:00",
+      columns: [{ width: "1fr", blocks: [{ title: "Keynote Address", talkTitle: "Unlocking Brain Potential: What and How to Learn in the AI Era", speaker: "Chi-Hung Juan, Chair Professor and Executive Vice President (National Central University)", location: "M201" }] }],
+    },
+    {
+      time: "5:00–5:30",
+      columns: [{ width: "1fr", blocks: [{ title: "Awards and Closing", location: "M201" }] }],
+    },
   ],
-},
-  {
-    time: "3:30–4:00",
-    columns: [{ width: "1fr", blocks: [{ title: "Afternoon Tea", location: 'M232 & M233' }] }],
-  },
-  {
-    time: "4:00–5:00",
-    columns: [{ width: "1fr", blocks: [{ title: "Keynote Address", talkTitle: "Unlocking Brain Potential: What and How to Learn in the AI Era", speaker: "Chi-Hung Juan, Chair Professor and Executive Vice President (National Central University)", location: 'M201' }] }],
-  },
-  {
-    time: "5:00–5:30",
-    columns: [{ width: "1fr", blocks: [{ title: "Awards and Closing", location: 'M201' }] }],
-  },
-],
 
   importantDates: [
-    {
-      label: "Oral Presentation Submission Deadline",
-      value: "May 5, 2026",
-    },
-    {
-      label: "Poster Proposal Deadline",
-      value: "May 8, 2026",
-    },
-        {
-      label: "Poster Files Due",
-      value: "June 5, 2026",
-    },
-    {
-      label: "ICIC Conference",
-      value: "June 25, 2026",
-    },
+    { label: "Oral Presentation Submission Deadline", value: "May 5, 2026" },
+    { label: "Poster Proposal Deadline", value: "May 8, 2026" },
+    { label: "Poster Files Due", value: "June 5, 2026" },
+    { label: "ICIC Conference", value: "June 25, 2026" },
   ],
 
   documents: [
-  {
-    group: "General",
-    items: [
-      { label: "Conference Program", href: "/documents/ICIC2026-Conference-Program.pdf" },
-      { label: "Campus/Event Map", href: "/documents/Maps.pdf" },
-    ],
-  },
-  {
-    //group: "Oral Presentations",
-    items: [
-      // { label: "Submit an Oral Presentation Proposal", href: "https://forms.gle/LEwj9x1rUFDZZgff7", external: true },
-      //{ label: "Oral Presentations Schedule", href: "/documents/ICIC2026 Draft Conference Schedule.pdf"},
-      //{ label: "Oral Presentations Abstracts", href: "/documents/Oral Presentations Abstracts.pdf"},
-      //{ label: "Abstracts", href: "/documents/ICIC abstracts.pdf" },
-    ],
-  },
-  {
-    group: "Poster Presentations",
-    items: [
-      //{ label: "Submit a Poster Presentation Proposal", href: "https://forms.gle/ykdUsYnfrtq8CUsA9", external: true },
-     // { label: "Poster Presentations Abstracts", href: "/documents/poster abstracts.pdf"},
-      { label: "Poster Presentation Fact Sheet", href: "/documents/poster fact sheet.pdf" },
-      { label: "Poster Judging Criteria", href: "/documents/judging criteria.pdf" },
-      //{ label: "Sample Authorization Sheet", href: "/documents/authorization sheet sample.pdf" },
-    ],
-  },
-],
+    {
+      group: "General",
+      items: [
+        { label: "Conference Program", href: "/documents/ICIC2026-Conference-Program.pdf" },
+        { label: "Campus/Event Map", href: "/documents/Maps.pdf" },
+      ],
+    },
+    {
+      items: [],
+    },
+    {
+      group: "Poster Presentations",
+      items: [
+        { label: "Poster Presentation Fact Sheet", href: "/documents/poster fact sheet.pdf" },
+        { label: "Poster Judging Criteria", href: "/documents/judging criteria.pdf" },
+      ],
+    },
+  ],
 
   speakerSchedule: [
     {
@@ -132,24 +110,7 @@ const homepageData = {
         {
           label: "Session 1-A",
           location: "M145",
-          chair: "Makiko Yurita",
-          papers: [
-            {
-              speaker: "Aining Hsieh",
-              affiliation: "National Chi Nan University",
-              title: "Trend Changes in Southeast Asian-Themed Content on Public Television Service (2001–2024)",
-            },
-            {
-              speaker: "Kai Wah Hen",
-              affiliation: "Universiti Tunku Abdul Rahman",
-              title: "Cross-Border E-Commerce in Southeast Asia: A Qualitative Study of Challenges and Opportunities for Taiwanese Merchants",
-            },
-          ],
-        },
-        {
-          label: "Session 1-B",
-          location: "M146",
-          chair: "Moiyen Zalal Chowdhury",
+          chair: "Chifumi Takagi",
           papers: [
             {
               speaker: "Iljoon Park",
@@ -206,9 +167,9 @@ const homepageData = {
               title: "Reading War Across Contexts: Feminist Film Analysis and Global Visual Literacy in Ukrainian Cinema",
             },
             {
-              speaker: "Moiyen Zalal Chowdhury",
-              affiliation: "BRAC University",
-              title: "Visible Bodies, Invisible Power: Gender, Protest, and the Politics of Legitimacy in Bangladesh\u2019s July 2024 Uprising",
+              speaker: "Aining Hsieh",
+              affiliation: "National Chi Nan University",
+              title: "Trend Changes in Southeast Asian-Themed Content on Public Television Service (2001\u20132024)",
             },
           ],
         },
@@ -260,9 +221,9 @@ const homepageData = {
               title: "Curiosity, Creativity, Criticality: An AI-Resilient Framework for English-Medium Higher Arts Education",
             },
             {
-              speaker: "Fatiha Nesrine Bouzid",
-              affiliation: "Independent Scholar",
-              title: "My True Voice: Artificial Intelligence as a Bridge for Identity and the Empowerment of Sovereign Consciousness (F) in Liberal Education",
+              speaker: "Kai Wah Hen",
+              affiliation: "Universiti Tunku Abdul Rahman",
+              title: "Cross-Border E-Commerce in Southeast Asia: A Qualitative Study of Challenges and Opportunities for Taiwanese Merchants",
             },
           ],
         },
@@ -271,36 +232,12 @@ const homepageData = {
   ],
 
   sponsors: [
-    {
-      name: "Tunghai University",
-      image: "/images/logos/thu.svg",
-      href: "https://www.thu.edu.tw",
-    },
-    {
-      name: "International College",
-      image: "/images/logos/ic.svg",
-      href: "https://ic.thu.edu.tw/",
-    },
-    {
-      name: "International Liberal Arts Honors Program",
-      image: "/images/logos/honors.png",
-      href: "https://honors.thu.edu.tw/",
-    },
-    {
-      name: "International Business Administration",
-      image: "/images/logos/iba.jpg",
-      href: "https://iba.thu.edu.tw/",
-    },
-    {
-      name: "IDP",
-      image: "/images/logos/idp.jpg",
-      href: "https://ic.thu.edu.tw/web/about/page.php?lang=en&scid=15&sid=84",
-    },
-    {
-      name: "Sustainability Science and Engineering",
-      image: "/images/logos/ssm.jpg",
-      href: "https://ic.thu.edu.tw/web/about/page.php?lang=en&scid=15&sid=2",
-    },
+    { name: "Tunghai University", image: "/images/logos/thu.svg", href: "https://www.thu.edu.tw" },
+    { name: "International College", image: "/images/logos/ic.svg", href: "https://ic.thu.edu.tw/" },
+    { name: "International Liberal Arts Honors Program", image: "/images/logos/honors.png", href: "https://honors.thu.edu.tw/" },
+    { name: "International Business Administration", image: "/images/logos/iba.jpg", href: "https://iba.thu.edu.tw/" },
+    { name: "IDP", image: "/images/logos/idp.jpg", href: "https://ic.thu.edu.tw/web/about/page.php?lang=en&scid=15&sid=84" },
+    { name: "Sustainability Science and Engineering", image: "/images/logos/ssm.jpg", href: "https://ic.thu.edu.tw/web/about/page.php?lang=en&scid=15&sid=2" },
   ],
 
   footer: {
