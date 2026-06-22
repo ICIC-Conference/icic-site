@@ -110,7 +110,7 @@ const homepageData = {
         {
           label: "Session 1-A",
           location: "M145",
-          chair: "Chifumi Takagi",
+          chair: "Makiko Yurita",
           papers: [
             {
               speaker: "Iljoon Park",
