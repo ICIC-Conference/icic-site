@@ -193,12 +193,7 @@ const homepageData = {
               affiliation: "American University of Sharjah",
               title: "Building ESL Students\u2019 Presentation Skills While Leveraging GAI and PB",
             },
-            {
-              speaker: "Yulis",
-              affiliation: "National Chung Hsing University",
-              title: "Building Bilingual Environment in Taiwan: Bridging Policy and Practice in Public Education",
-            },
-            {
+                        {
               speaker: "Imed Nsiri",
               affiliation: "American University of Sharjah",
               title: "Arab Heritage in an English Language Context",
@@ -211,11 +206,6 @@ const homepageData = {
           chair: "Julien Paret",
           papers: [
             {
-              speaker: "Priyanka C. Bhatt",
-              affiliation: "Yuan Ze University",
-              title: "Designing EMI Business and Technology\u2013Oriented Courses in the Age of AI: Pedagogical Strategies from Multilingual Classrooms",
-            },
-            {
               speaker: "Subashini K. Rajanthran",
               affiliation: "University of the Arts Singapore",
               title: "Curiosity, Creativity, Criticality: An AI-Resilient Framework for English-Medium Higher Arts Education",
@@ -224,6 +214,11 @@ const homepageData = {
               speaker: "Kai Wah Hen",
               affiliation: "Universiti Tunku Abdul Rahman",
               title: "Cross-Border E-Commerce in Southeast Asia: A Qualitative Study of Challenges and Opportunities for Taiwanese Merchants",
+            },
+            {
+              speaker: "Yulis",
+              affiliation: "National Chung Hsing University",
+              title: "Building Bilingual Environment in Taiwan: Bridging Policy and Practice in Public Education",
             },
           ],
         },
