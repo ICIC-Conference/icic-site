@@ -138,6 +138,79 @@ const conferences = allConferences.sort((a, b) => b.data.year - a.data.year);
       text-align: center;
     }
 
+    .keynotes {
+      margin-top: 32px;
+    }
+
+    .keynotes-label {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted, #6b6b6b);
+      margin: 0 0 20px 0;
+    }
+
+    .keynote-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .keynote-card {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .keynote-photo {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid var(--rule);
+    }
+
+    .keynote-photo-placeholder {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--rule);
+      flex-shrink: 0;
+    }
+
+    .keynote-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .keynote-name {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 0;
+    }
+
+    .keynote-role {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--muted, #6b6b6b);
+      margin: 0;
+    }
+
+    .keynote-talk {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text, #2a2a2a);
+      margin: 4px 0 0 0;
+    }
+
     @media (max-width: 860px) {
       .page-hero {
         padding: 40px 28px 36px;
@@ -181,6 +254,34 @@ const conferences = allConferences.sort((a, b) => b.data.year - a.data.year);
 
               {conf.data.description && (
                 <p class="conference-description">{conf.data.description}</p>
+              )}
+
+              {conf.data.keynotes && conf.data.keynotes.length > 0 && (
+                <div class="keynotes">
+                  <p class="keynotes-label">Keynote Speakers</p>
+                  <div class="keynote-list">
+                    {conf.data.keynotes.map((k) => (
+                      <div class="keynote-card">
+                        {k.image ? (
+                          <img
+                            src={`${base}${k.image}`}
+                            alt={k.name}
+                            class="keynote-photo"
+                          />
+                        ) : (
+                          <div class="keynote-photo-placeholder" />
+                        )}
+                        <div class="keynote-info">
+                          <p class="keynote-name">{k.name}</p>
+                          <p class="keynote-role">{k.role}, {k.institution}</p>
+                          {k.talkTitle && (
+                            <p class="keynote-talk">"{k.talkTitle}"</p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               )}
             </div>
 
