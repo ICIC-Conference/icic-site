@@ -1,4 +1,7 @@
 const homepageData = {
+  scheduleDisplayOn: true,
+  speakerScheduleDisplayOn: true,
+
   video: {
     displayOn: true,
     url: "https://www.youtube.com/embed/qKkFxaKfAN8",
