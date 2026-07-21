@@ -3,10 +3,10 @@ import MainLayout from "../layouts/MainLayout.astro";
 import homepageData from "../data/homepage";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const { hero, theme, keynote, schedule, speakerSchedule, importantDates, documents, sponsors, footer } = homepageData;
+const { hero, theme, keynote, schedule, speakerSchedule, importantDates, documents, sponsors, footer, video, conferenceProgram } = homepageData;
 
 // Set to true to show the livestream section on the homepage.
-const showLivestream = true;
+
 ---
 
 <MainLayout title="ICIC 2026">
@@ -633,7 +633,7 @@ const showLivestream = true;
       <img src={`${base}${hero.image}`} alt={hero.title} class="hero-image" />
       <div class="hero-overlay">
         <div class="hero-text">
-          <p class="hero-label">ICIC 2026</p>
+          <p class="hero-label">{hero.shortLabel}</p>
           <h2>{hero.title}</h2>
           <div class="hero-meta">
             <span>{hero.date}</span>
@@ -643,12 +643,12 @@ const showLivestream = true;
       </div>
     </section>
 
-    {showLivestream && (
+    {video.displayOn && (
       <section class="livestream-section">
         <p class="livestream-label">Awards Ceremony</p>
         <div class="livestream-wrap">
          <iframe
-  src="https://www.youtube.com/embed/qKkFxaKfAN8"
+  src={video.url}
   title="ICIC 2026 Recording"
   frameborder="0"
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -658,10 +658,12 @@ const showLivestream = true;
       </section>
     )}
 
-    <!-- Program Announcement -->
-    <section class="cfp-banner">
-      <p class="cfp-lede">The full conference program is now available <a href={`${base}/documents/ICIC2026-Conference-Program.pdf`} target="_blank" rel="noopener noreferrer">here</a>.</p>
-    </section>
+    {conferenceProgram.displayOn && (
+      <!-- Program Announcement -->
+      <section class="cfp-banner">
+        <p class="cfp-lede">The full conference program is now available <a href={`${base}${conferenceProgram.url}`} target="_blank" rel="noopener noreferrer">here</a>.</p>
+      </section>
+    )}
 
     <!-- Theme -->
     <section class="theme-section">
