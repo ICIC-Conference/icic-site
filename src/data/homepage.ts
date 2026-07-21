@@ -101,7 +101,7 @@ const homepageData = {
     {
       group: "General",
       items: [
-        { label: "Campus/Event Map", href: "/documents/Maps.pdf" },
+        { label: "Campus/Event Map", href: "/site-documents/Maps.pdf" },
       ],
     },
     {
@@ -110,8 +110,8 @@ const homepageData = {
     {
       group: "Poster Presentations",
       items: [
-        { label: "Poster Presentation Fact Sheet", href: "/documents/poster fact sheet.pdf" },
-        { label: "Poster Judging Criteria", href: "/documents/judging criteria.pdf" },
+        { label: "Poster Presentation Fact Sheet", href: "/site-documents/poster fact sheet.pdf" },
+        { label: "Poster Judging Criteria", href: "/site-documents/judging criteria.pdf" },
       ],
     },
   ],
