@@ -56,11 +56,11 @@ const homepageData = {
       ],
     },
     {
-      time: "12:30–1:30",
+      time: "12:30–13:30",
       columns: [{ width: "1fr", blocks: [{ title: "Lunch", location: "M232 & M233" }] }],
     },
     {
-      time: "1:30–3:30",
+      time: "13:30–15:30",
       columns: [
         { width: "1fr", blocks: [{ title: "Oral Sessions 3-A", location: "M145" }] },
         { width: "1fr", blocks: [{ title: "Oral Sessions 3-B", location: "M146" }] },
@@ -74,15 +74,15 @@ const homepageData = {
       ],
     },
     {
-      time: "3:30–4:00",
+      time: "15:30–16:00",
       columns: [{ width: "1fr", blocks: [{ title: "Afternoon Tea", location: "M232 & M233" }] }],
     },
     {
-      time: "4:00–5:00",
+      time: "16:00–17:00",
       columns: [{ width: "1fr", blocks: [{ title: "Keynote Address", talkTitle: "Unlocking Brain Potential: What and How to Learn in the AI Era", speaker: "Chi-Hung Juan, Chair Professor and Executive Vice President (National Central University)", location: "M201" }] }],
     },
     {
-      time: "5:00–5:30",
+      time: "17:00–17:30",
       columns: [{ width: "1fr", blocks: [{ title: "Awards and Closing", location: "M201" }] }],
     },
   ],
@@ -187,7 +187,7 @@ const homepageData = {
       ],
     },
     {
-      time: "1:30–3:30",
+      time: "13:30–15:30",
       sessions: [
         {
           label: "Session 3-A",
