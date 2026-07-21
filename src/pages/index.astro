@@ -676,21 +676,23 @@ const { hero, theme, keynote, schedule, speakerSchedule, importantDates, documen
     <!-- Keynote -->
     <section class="section">
       <p class="section-label">Keynote Address</p>
-      <h2>Featured Speaker</h2>
+      <h2>{keynote.length > 1 ? 'Featured Speakers' : 'Featured Speaker'}</h2>
 
-      <div class="keynote-grid">
-        <div class="keynote-image-wrap">
-          <img src={`${base}${keynote.image}`} alt={keynote.name} class="keynote-image" />
-          <div class="keynote-image-accent"></div>
-        </div>
+      {keynote.map((k) => (
+        <div class="keynote-grid">
+          <div class="keynote-image-wrap">
+            <img src={`${base}${k.image}`} alt={k.name} class="keynote-image" />
+            <div class="keynote-image-accent"></div>
+          </div>
 
-        <div class="keynote-info">
-          <h3>{keynote.name}</h3>
-          <p class="keynote-role">{keynote.title}</p>
-          <p class="keynote-talk-title">{keynote.talkTitle}</p>
-          <p class="keynote-description">{keynote.description}</p>
+          <div class="keynote-info">
+            <h3>{k.name}</h3>
+            <p class="keynote-role">{k.title}</p>
+            <p class="keynote-talk-title">{k.talkTitle}</p>
+            <p class="keynote-description">{k.description}</p>
+          </div>
         </div>
-      </div>
+      ))}
     </section>
 
     <!-- Schedule -->
