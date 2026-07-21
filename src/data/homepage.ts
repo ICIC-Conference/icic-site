@@ -26,7 +26,8 @@ const homepageData = {
       "As Tunghai University approaches its seventieth anniversary, the International College invites students, faculty, and researchers to reflect on the evolving purposes of liberal learning in a rapidly changing world. International colleges occupy a distinctive position within higher education: multilingual, globally oriented, and committed to academic breadth as well as professional preparation. These commitments raise urgent questions about what liberal learning should look like in the decades ahead, and how institutions can cultivate intellectual flexibility, ethical awareness, intercultural fluency, and the capacity to navigate complex global challenges.",
   },
 
-  keynote: {
+  keynote: [
+  {
     name: "Chi-Hung Juan",
     talkTitle: "Unlocking Brain Potential: What and How to Learn in the AI Era",
     title: "Chair Professor and Executive Vice President, National Central University",
@@ -34,6 +35,7 @@ const homepageData = {
       "Join me as we explore the history of AI and its profound impact on our daily lives and the academic world through the lens of brain science. With this foundation, we will focus on how students and educators can proactively harness the power of these rapidly evolving AI tools to effectively pursue their goals. I look forward to an interactive brainstorming session with the audience as we envision an even brighter future in the AI era together.",
     image: "/images/site/keynote-juan.jpg",
   },
+  ],
 
   schedule: [
     {
