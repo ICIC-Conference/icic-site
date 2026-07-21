@@ -101,7 +101,6 @@ const homepageData = {
     {
       group: "General",
       items: [
-        { label: "Conference Program", href: "/documents/ICIC2026-Conference-Program.pdf" },
         { label: "Campus/Event Map", href: "/documents/Maps.pdf" },
       ],
     },
