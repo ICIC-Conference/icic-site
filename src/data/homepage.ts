@@ -1,5 +1,16 @@
 const homepageData = {
+  video: {
+    displayOn: true,
+    url: "https://www.youtube.com/embed/qKkFxaKfAN8",
+  },
+
+  conferenceProgram: {
+    displayOn: true,
+    url: "/programs/Program 2026.pdf",
+  },
+
   hero: {
+    shortLabel: "ICIC 2026",
     title: "International Conference on International Colleges 2026",
     date: "Thursday, June 25, 2026",
     venue: "Tunghai University International College",

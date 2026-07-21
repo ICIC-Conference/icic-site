@@ -2,7 +2,8 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import homepageData from "../data/homepage";
 
-const { speakerSchedule } = homepageData;
+const { speakerSchedule, conferenceProgram } = homepageData;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <MainLayout title="Oral Presentations">
@@ -427,7 +428,9 @@ const { speakerSchedule } = homepageData;
 
     <div class="content-section">
 
-      <p class="cfp-lede">The full conference program is now available <a href="/documents/ICIC2026-Conference-Program.pdf">here</a>.</p>
+      {conferenceProgram.displayOn && (
+        <p class="cfp-lede">The full conference program is now available <a href={`${base}${conferenceProgram.url}`} target="_blank" rel="noopener noreferrer">here</a>.</p>
+      )}
 
       <div class="intro">
         <p>
