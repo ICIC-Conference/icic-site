@@ -97,15 +97,12 @@ const homepageData = {
     { label: "ICIC Conference", value: "June 25, 2026" },
   ],
 
-  documents: [
+  documents: 
     {
       group: "General",
       items: [
         { label: "Campus/Event Map", href: "/site-documents/Maps.pdf" },
       ],
-    },
-    {
-      items: [],
     },
     {
       group: "Poster Presentations",
