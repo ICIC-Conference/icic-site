@@ -33,7 +33,7 @@ const homepageData = {
     title: "Chair Professor and Executive Vice President, National Central University",
     description:
       "Join me as we explore the history of AI and its profound impact on our daily lives and the academic world through the lens of brain science. With this foundation, we will focus on how students and educators can proactively harness the power of these rapidly evolving AI tools to effectively pursue their goals. I look forward to an interactive brainstorming session with the audience as we envision an even brighter future in the AI era together.",
-    image: "/images/site/keynote-juan.jpg",
+    image: "/images/keynote/Chi-Hung_Juan.jpg",
   },
   ],
 
