@@ -239,12 +239,12 @@ const homepageData = {
   ],
 
   sponsors: [
-    { name: "Tunghai University", image: "/images/logos/thu.svg", href: "https://www.thu.edu.tw" },
-    { name: "International College", image: "/images/logos/ic.svg", href: "https://ic.thu.edu.tw/" },
-    { name: "International Liberal Arts Honors Program", image: "/images/logos/honors.png", href: "https://honors.thu.edu.tw/" },
-    { name: "International Business Administration", image: "/images/logos/iba.jpg", href: "https://iba.thu.edu.tw/" },
-    { name: "IDP", image: "/images/logos/idp.jpg", href: "https://ic.thu.edu.tw/web/about/page.php?lang=en&scid=15&sid=84" },
-    { name: "Sustainability Science and Engineering", image: "/images/logos/ssm.jpg", href: "https://ic.thu.edu.tw/web/about/page.php?lang=en&scid=15&sid=2" },
+    { name: "Tunghai University", image: "/images/logos/Tunghai_University.svg", href: "https://www.thu.edu.tw" },
+    { name: "International College", image: "/images/logos/International_College.svg", href: "https://ic.thu.edu.tw/" },
+    { name: "Tunghai Honors Program", image: "/images/logos/Tunghai_Honors_Program.png", href: "https://honors.thu.edu.tw/" },
+    { name: "International Business Administration", image: "/images/logos/International_Business_Administration.jpg", href: "https://iba.thu.edu.tw/" },
+    { name: "Interdisciplinary Degree Program", image: "/images/logos/Interdisciplinary_Degree_Program.jpg", href: "https://ic.thu.edu.tw/web/about/page.php?lang=en&scid=15&sid=84" },
+    { name: "Sustainability Science and Engineering", image: "/images/logos/Sustainability_Science_and_Management.jpg", href: "https://ic.thu.edu.tw/web/about/page.php?lang=en&scid=15&sid=2" },
   ],
 
   footer: {
