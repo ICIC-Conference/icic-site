@@ -244,7 +244,7 @@ const homepageData = {
     { name: "Tunghai Honors Program", image: "/images/logos/Tunghai_Honors_Program.png", href: "https://honors.thu.edu.tw/" },
     { name: "International Business Administration", image: "/images/logos/International_Business_Administration.jpg", href: "https://iba.thu.edu.tw/" },
     { name: "Interdisciplinary Degree Program", image: "/images/logos/Interdisciplinary_Degree_Program.jpg", href: "https://ic.thu.edu.tw/web/about/page.php?lang=en&scid=15&sid=84" },
-    { name: "Sustainability Science and Engineering", image: "/images/logos/Sustainability_Science_and_Management.jpg", href: "https://ic.thu.edu.tw/web/about/page.php?lang=en&scid=15&sid=2" },
+    { name: "Sustainability Science and Management", image: "/images/logos/Sustainability_Science_and_Management.jpg", href: "https://ic.thu.edu.tw/web/about/page.php?lang=en&scid=15&sid=2" },
   ],
 
   footer: {
