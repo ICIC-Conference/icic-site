@@ -2,7 +2,7 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import homepageData from "../data/homepage";
 
-const { conferenceProgram } = homepageData;
+const { conferenceProgram, posterPresentationsPage } = homepageData;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
@@ -318,46 +318,19 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <p class="cfp-lede">The full conference program is now available <a href={`${base}${conferenceProgram.url}`} target="_blank" rel="noopener noreferrer">here</a>.</p>
 )}
       
-      <p class="categories-intro">Posters are accepted in three categories:</p>
+      <p class="categories-intro">Posters are accepted in {posterPresentationsPage.categories.length} categories:</p>
       
       <div class="categories">
-        <div class="category-card">
-          <h3>Business &amp; Social Sciences</h3>
-          <p class="guidance">Choose this category if your project mainly looks at how people, groups, or organizations work in the real world.</p>
-          <ul>
-            <li>Business, marketing, finance</li>
-            <li>Psychology and behaviour</li>
-            <li>Society, culture, education</li>
-            <li>Communication, media, public issues</li>
-            <li>Governments, institutions, international affairs</li>
-          </ul>
-          <p class="fit-note">If your project studies real-world behaviour, systems, trends, or practical problems, it fits here.</p>
-        </div>
-
-        <div class="category-card">
-          <h3>Natural &amp; Environmental Sciences</h3>
-          <p class="guidance">Choose this category if your project is about nature, science, the environment, or technology.</p>
-          <ul>
-            <li>Biology, chemistry, physics</li>
-            <li>Environmental issues, ecosystems, sustainability</li>
-            <li>Engineering, computing, data, algorithms</li>
-            <li>Scientific experiments or technical designs</li>
-          </ul>
-          <p class="fit-note">If your project studies how natural or technical systems work, it fits here.</p>
-        </div>
-
-        <div class="category-card">
-          <h3>Arts &amp; Humanities</h3>
-          <p class="guidance">Choose this category if your project is mainly about ideas, values, meaning, culture, ethics, language, creativity, or how we understand human experience.</p>
-          <ul>
-            <li>Literature, writing, languages</li>
-            <li>Philosophy, ethics, religion</li>
-            <li>History, culture, communication</li>
-            <li>Art or design concepts presented in poster form</li>
-            <li>Questions about values, principles, or meaning</li>
-          </ul>
-          <p class="fit-note">If your project focuses on ideas, values, culture, or how we make sense of the human world, it fits here.</p>
-        </div>
+        {posterPresentationsPage.categories.map((cat) => (
+          <div class="category-card">
+            <h3>{cat.name}</h3>
+            <p class="guidance">{cat.guidance}</p>
+            <ul>
+              {cat.bullets.map((bullet) => (<li>{bullet}</li>))}
+            </ul>
+            <p class="fit-note">{cat.fitNote}</p>
+          </div>
+        ))}
       </div>
 
       <div class="info-section">
@@ -373,39 +346,37 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         <div class="info-block">
           <h2>What You Submit</h2>
           <ul>
-            <li><span class="deadline">By May 8:</span> Poster title and abstract, submitted via the online form</li>
-            <li><span class="deadline">By June 5:</span> A1 poster file (PDF, JPG, or PNG)</li>
+            <li><span class="deadline">By {posterPresentationsPage.posterDeadlineDisplay}:</span> Poster title and abstract, submitted via the online form</li>
+            <li><span class="deadline">By {posterPresentationsPage.posterFileDeadlineDisplay}:</span> A1 poster file (PDF, JPG, or PNG)</li>
           </ul>
         </div>
       </div>
 
-      <div class="prizes-section">
-        <div>
-          <h2>Prizes</h2>
-          <p class="prizes-note">Awarded per category, in both High School and University divisions.</p>
-          <div class="prize-list">
-            <div class="prize-item">
-              <span class="prize-rank">1st Place</span>
-              <span class="prize-amount">NT$3,000</span>
-            </div>
-            <div class="prize-item">
-              <span class="prize-rank">2nd Place</span>
-              <span class="prize-amount">NT$2,000</span>
-            </div>
-            <div class="prize-item">
-              <span class="prize-rank">3rd Place</span>
-              <span class="prize-amount">NT$1,000</span>
+      {posterPresentationsPage.prizesDisplayOn && (
+        <div class="prizes-section">
+          <div>
+            <h2>Prizes</h2>
+            <p class="prizes-note">{posterPresentationsPage.prizesNote}</p>
+            <div class="prize-list">
+              {posterPresentationsPage.prizes.map((p) => (
+                <div class="prize-item">
+                  <span class="prize-rank">{p.rank}</span>
+                  <span class="prize-amount">{p.amount}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      </div>
+      )}
 
-      <!-- <div style="padding-top: 32px;"> -->
-        <!-- <a href="https://docs.google.com/forms/d/e/1FAIpQLScu4Kqr_lL1WZNLLuP-VpZEs6hHngBPb7L1dnxqWU5aYMeVvg/viewform?usp=header" class="submit-button">Submit a Poster Proposal →</a> -->
-      <!-- </div> -->
+      {posterPresentationsPage.submitButtonDisplayOn && (
+        <div style="padding-top: 32px;">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLScu4Kqr_lL1WZNLLuP-VpZEs6hHngBPb7L1dnxqWU5aYMeVvg/viewform?usp=header" class="submit-button">Submit a Poster Proposal →</a>
+        </div>
+      )}
 
       <p style="font-family: 'Source Sans 3', sans-serif; font-size: 0.9rem; color: var(--muted); font-weight: 300; line-height: 1.6; margin: 24px 0 0 0;">
-        Questions may be directed to Tan Jue Xin at <a href="mailto:tanjx@thu.edu.tw" style="color: var(--gold); text-decoration: none;">tanjx@thu.edu.tw</a> or Mrinalini Mishra at <a href="mailto:mishra_m@thu.edu.tw" style="color: var(--gold); text-decoration: none;">mishra_m@thu.edu.tw</a>.
+        Questions may be directed to {posterPresentationsPage.contactName} at {posterPresentationsPage.contactEmail}.
       </p>
 
     </div>
