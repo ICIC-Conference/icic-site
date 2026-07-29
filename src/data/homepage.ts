@@ -303,7 +303,9 @@ const homepageData = {
   },
 
   footer: {
+    contactName: "Ms. Tiffany Xie",
     contactEmail: "icic@thu.edu.tw",
+    contactPhone: "+886-4-2359-8941, x39303",
   },
 };
 
