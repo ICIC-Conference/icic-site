@@ -266,6 +266,42 @@ const homepageData = {
     submitButtonDisplayOn: false,
   },
 
+  posterPresentationsPage: {
+    categories: [
+      {
+        name: "Business & Social Sciences",
+        guidance: "Choose this category if your project mainly looks at how people, groups, or organizations work in the real world.",
+        bullets: ["Business, marketing, finance", "Psychology and behaviour", "Society, culture, education", "Communication, media, public issues", "Governments, institutions, international affairs"],
+        fitNote: "If your project studies real-world behaviour, systems, trends, or practical problems, it fits here.",
+      },
+      {
+        name: "Natural & Environmental Sciences",
+        guidance: "Choose this category if your project is about nature, science, the environment, or technology.",
+        bullets: ["Biology, chemistry, physics", "Environmental issues, ecosystems, sustainability", "Engineering, computing, data, algorithms", "Scientific experiments or technical designs"],
+        fitNote: "If your project studies how natural or technical systems work, it fits here.",
+      },
+      {
+        name: "Arts & Humanities",
+        guidance: "Choose this category if your project is mainly about ideas, values, meaning, culture, ethics, language, creativity, or how we understand human experience.",
+        bullets: ["Literature, writing, languages", "Philosophy, ethics, religion", "History, culture, communication", "Art or design concepts presented in poster form", "Questions about values, principles, or meaning"],
+        fitNote: "If your project focuses on ideas, values, culture, or how we make sense of the human world, it fits here.",
+      },
+    ],
+    posterDeadlineDisplay: "May 8",
+    posterFileDeadline: "2026-06-05",
+    posterFileDeadlineDisplay: "June 5",
+    prizesDisplayOn: true,
+    prizesNote: "Awarded per category, in both High School and University divisions.",
+    prizes: [
+      { rank: "1st Place", amount: "NT$3,000" },
+      { rank: "2nd Place", amount: "NT$2,000" },
+      { rank: "3rd Place", amount: "NT$1,000" },
+    ],
+    submitButtonDisplayOn: false,
+    contactName: "Tan Jue Xin and Mrinalini Mishra",
+    contactEmail: "tanjx@thu.edu.tw and mishra_m@thu.edu.tw",
+  },
+
   footer: {
     contactEmail: "icic@thu.edu.tw",
   },
