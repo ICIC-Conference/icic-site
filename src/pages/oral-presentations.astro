@@ -2,7 +2,7 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import homepageData from "../data/homepage";
 
-const { speakerSchedule, conferenceProgram, speakerScheduleDisplayOn } = homepageData;
+const { speakerSchedule, conferenceProgram, speakerScheduleDisplayOn, theme, hero, keynote, oralPresentationsPage } = homepageData;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
@@ -422,8 +422,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <div class="page-body">
     <div class="page-hero">
-      <h2>Seventy Years Forward: Liberal Learning for a Changing World</h2>
-      <p class="hero-sub">June 25, 2026 · Tunghai University, Taichung</p>
+      <h2>{theme.heading}</h2>
+      <p class="hero-sub">{hero.date} · Tunghai University, Taichung</p>
     </div>
 
     <div class="content-section">
@@ -433,71 +433,65 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       )}
 
       <div class="intro">
-        <p>
-          As Tunghai University approaches its seventieth anniversary, the International College invites scholars who teach and conduct research in English to share work that reflects the breadth and diversity of academic inquiry within English-medium higher education. We place particular emphasis on scholars teaching in non-English-dominant contexts, such as international colleges, where English functions as a shared academic language across linguistic, cultural, and disciplinary boundaries.
-        </p>
-        <p>
-          International colleges occupy a distinctive position within higher education: multilingual in practice, globally oriented in outlook, and committed to both academic breadth and professional preparation. These environments raise important questions about how liberal learning is pursued and communicated in such contexts. ICIC 2026 provides a forum for exploring these questions indirectly, through the presentation of diverse research and teaching-related work across disciplines.
-        </p>
-        <p>
-          In this spirit, ICIC 2026 welcomes submissions from all academic fields. Submissions need not address the conference theme directly; rather, the conference highlights how the full range of scholarly work conducted in English-medium, internationally oriented settings contributes to liberal learning in an increasingly interconnected world.
-        </p>
+        {oralPresentationsPage.intro.split('\n\n').filter((p) => p.trim()).map((para) => (
+          <p>{para}</p>
+        ))}
       </div>
 
-      {/*<div class="info-section">
-        <div class="info-block">
-          <h2>Submissions</h2>
-          <ul>
-            <li>Submit a title and 300-word abstract via the online form</li>
-            <li><span class="deadline">Deadline: May 5</span> — acceptance decisions communicated by late May</li>
-          </ul>
-        </div>
+      {(oralPresentationsPage.submissionsDisplayOn || oralPresentationsPage.conferenceSupportDisplayOn) && (
+        <div class="info-section">
+          {oralPresentationsPage.submissionsDisplayOn && (
+            <div class="info-block">
+              <h2>Submissions</h2>
+              <ul>
+                {oralPresentationsPage.submissionsText.split('\n').filter((l) => l.trim()).map((line) => (
+                  <li>{line}</li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-        <div class="info-block">
-          <h2>Conference Support</h2>
-          <p>Funding permitting, we anticipate being able to provide the following for a limited number of participants:</p>
-          <ul>
-            <li>Two nights of accommodation</li>
-            <li>High-speed rail tickets from Taoyuan International Airport to Taichung</li>
-            <li>A modest per diem</li>
-          </ul>
+          {oralPresentationsPage.conferenceSupportDisplayOn && (
+            <div class="info-block">
+              <h2>Conference Support</h2>
+              <ul>
+                {oralPresentationsPage.conferenceSupportText.split('\n').filter((l) => l.trim()).map((line) => (
+                  <li>{line}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
-      </div>*/}
+      )}
 
       <div class="participants-section">
         <h2>Participants</h2>
         <div class="participants-grid">
           <div class="speaker-group">
-            <h3>Keynote Speaker</h3>
+            <h3>{keynote.length > 1 ? 'Keynote Speakers' : 'Keynote Speaker'}</h3>
             <ul class="speaker-list">
-              <li>
-                <span class="speaker-name">Chi-Hung Juan</span>
-                <span class="speaker-affiliation">Chair Professor and Executive Vice President, National Central University</span>
-              </li>
+              {keynote.map((k) => (
+                <li>
+                  <span class="speaker-name">{k.name}</span>
+                  <span class="speaker-affiliation">{k.title}</span>
+                </li>
+              ))}
             </ul>
           </div>
 
-          <div class="speaker-group">
-            <h3>Invited Speakers</h3>
-            <ul class="speaker-list">
-              <li>
-                <span class="speaker-name">Marc Lanteigne</span>
-                <span class="speaker-affiliation">Professor of Political Science, Arctic University of Norway, Tromsø, Norway</span>
-              </li>
-              <li>
-                <span class="speaker-name">Makito Yurita</span>
-                <span class="speaker-affiliation">Professor, National Institute for School Teachers and Staff Development, Japan</span>
-              </li>
-              <li>
-                <span class="speaker-name">Jessica Sze Yin Ho</span>
-                <span class="speaker-affiliation">Associate Professor, Edinburgh Business School, Heriot-Watt University, Malaysia</span>
-              </li>
-              <li>
-                <span class="speaker-name">Michael Mikulewicz</span>
-                <span class="speaker-affiliation">Assistant Professor, Department of Environmental Studies, State University of New York ESF, USA</span>
-              </li>
-            </ul>
-          </div>
+          {oralPresentationsPage.invitedSpeakersDisplayOn && (
+            <div class="speaker-group">
+              <h3>Invited Speakers</h3>
+              <ul class="speaker-list">
+                {oralPresentationsPage.invitedSpeakers.map((s) => (
+                  <li>
+                    <span class="speaker-name">{s.name}</span>
+                    <span class="speaker-affiliation">{s.affiliation}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
 
@@ -540,10 +534,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
       <div class="closing-note">
         <p>
-          This is a fully in-person conference.<br>
-          Questions may be directed to Chifumi Takagi at <a href="mailto:ctakagi@thu.edu.tw">ctakagi@thu.edu.tw</a>.
+          {oralPresentationsPage.closingNoteText && (<>{oralPresentationsPage.closingNoteText}<br /></>)}
+          Questions may be directed to {oralPresentationsPage.contactName} at <a href={`mailto:${oralPresentationsPage.contactEmail}`}>{oralPresentationsPage.contactEmail}</a>.
         </p>
-        {/* <a href="https://script.google.com/macros/s/AKfycbyH5PjaNCZnJo2L8LVr6q5uOE4kfyLNDT1CyddGj0MduPqBTxfE_p2KcWuPX8z1cEcE/exec" class="submit-button">Submit an Abstract →</a>*/}
+        {oralPresentationsPage.submitButtonDisplayOn && (
+          <a href="https://script.google.com/macros/s/AKfycbyH5PjaNCZnJo2L8LVr6q5uOE4kfyLNDT1CyddGj0MduPqBTxfE_p2KcWuPX8z1cEcE/exec" class="submit-button">Submit an Abstract →</a>
+        )}
       </div>
 
     </div>
