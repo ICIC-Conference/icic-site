@@ -1,5 +1,7 @@
 ---
 import { getCollection } from "astro:content";
+import homepageData from "../data/homepage";
+const { footer } = homepageData;
 
 const { title, description = "ICIC 2026: Seventy Years Forward — Liberal Learning for a Changing World. June 25, 2026, Tunghai University, Taichung." } = Astro.props;
 
@@ -329,9 +331,9 @@ const pageTitle = title === "ICIC 2026" ? title : `${title} | ICIC 2026`;
       </div>
 
       <div class="footer-contact">
-        <div>Contact: Ms. Tiffany Xie</div>
-        <div>Email: <a href="mailto:icic@thu.edu.tw">icic@thu.edu.tw</a></div>
-        <div>Phone: <a href="tel:+886423598941">+886-4-2359-8941</a>, x39303</div>
+        <div>Contact: {footer.contactName}</div>
+        <div>Email: <a href={`mailto:${footer.contactEmail}`}>{footer.contactEmail}</a></div>
+        <div>Phone: {footer.contactPhone}</div>
       </div>
     </footer>
   </body>
