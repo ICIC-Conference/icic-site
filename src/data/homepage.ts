@@ -247,6 +247,25 @@ const homepageData = {
     { name: "Sustainability Science and Management", image: "/images/logos/Sustainability_Science_and_Management.jpg", href: "https://ic.thu.edu.tw/web/about/page.php?lang=en&scid=15&sid=2" },
   ],
 
+  oralPresentationsPage: {
+    intro: "As Tunghai University approaches its seventieth anniversary, the International College invites scholars who teach and conduct research in English to share work that reflects the breadth and diversity of academic inquiry within English-medium higher education. We place particular emphasis on scholars teaching in non-English-dominant contexts, such as international colleges, where English functions as a shared academic language across linguistic, cultural, and disciplinary boundaries.\n\nInternational colleges occupy a distinctive position within higher education: multilingual in practice, globally oriented in outlook, and committed to both academic breadth and professional preparation. These environments raise important questions about how liberal learning is pursued and communicated in such contexts. ICIC 2026 provides a forum for exploring these questions indirectly, through the presentation of diverse research and teaching-related work across disciplines.\n\nIn this spirit, ICIC 2026 welcomes submissions from all academic fields. Submissions need not address the conference theme directly; rather, the conference highlights how the full range of scholarly work conducted in English-medium, internationally oriented settings contributes to liberal learning in an increasingly interconnected world.",
+    invitedSpeakersDisplayOn: true,
+    invitedSpeakers: [
+      { name: "Marc Lanteigne", affiliation: "Professor of Political Science, Arctic University of Norway, Tromsø, Norway" },
+      { name: "Makito Yurita", affiliation: "Professor, National Institute for School Teachers and Staff Development, Japan" },
+      { name: "Jessica Sze Yin Ho", affiliation: "Associate Professor, Edinburgh Business School, Heriot-Watt University, Malaysia" },
+      { name: "Michael Mikulewicz", affiliation: "Assistant Professor, Department of Environmental Studies, State University of New York ESF, USA" },
+    ],
+    submissionsDisplayOn: false,
+    submissionsText: "Submit a title and 300-word abstract via the online form\nDeadline: May 5 — acceptance decisions communicated by late May",
+    conferenceSupportDisplayOn: false,
+    conferenceSupportText: "Funding permitting, we anticipate being able to provide the following for a limited number of participants:\nTwo nights of accommodation\nHigh-speed rail tickets from Taoyuan International Airport to Taichung\nA modest per diem",
+    closingNoteText: "This is a fully in-person conference.",
+    contactName: "Chifumi Takagi",
+    contactEmail: "ctakagi@thu.edu.tw",
+    submitButtonDisplayOn: false,
+  },
+
   footer: {
     contactEmail: "icic@thu.edu.tw",
   },
