@@ -537,6 +537,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           {oralPresentationsPage.closingNoteText && (<>{oralPresentationsPage.closingNoteText}<br /></>)}
           Questions may be directed to {oralPresentationsPage.contactName} at <a href={`mailto:${oralPresentationsPage.contactEmail}`}>{oralPresentationsPage.contactEmail}</a>.
         </p>
+        {oralPresentationsPage.submissionDeadlineDisplay && (
+          <p class="submission-deadline">Submit an abstract by {oralPresentationsPage.submissionDeadlineDisplay}</p>
+        )}
         {oralPresentationsPage.submitButtonDisplayOn && (
           <a href="https://script.google.com/macros/s/AKfycbyH5PjaNCZnJo2L8LVr6q5uOE4kfyLNDT1CyddGj0MduPqBTxfE_p2KcWuPX8z1cEcE/exec" class="submit-button">Submit an Abstract →</a>
         )}
