@@ -261,6 +261,7 @@ const homepageData = {
     conferenceSupportDisplayOn: false,
     conferenceSupportText: "Funding permitting, we anticipate being able to provide the following for a limited number of participants:\nTwo nights of accommodation\nHigh-speed rail tickets from Taoyuan International Airport to Taichung\nA modest per diem",
     closingNoteText: "This is a fully in-person conference.",
+    submissionDeadlineDisplay: "",
     contactName: "Chifumi Takagi",
     contactEmail: "ctakagi@thu.edu.tw",
     submitButtonDisplayOn: false,
