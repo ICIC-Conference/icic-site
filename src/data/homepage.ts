@@ -94,6 +94,10 @@ const homepageData = {
   ],
 
   importantDates: [
+    { label: "Oral Presentations Submission Date", value: "May 5, 2026" },
+    { label: "Poster Presentation Submission Date", value: "May 8, 2026" },
+    { label: "Authorization Sheet Due Date", value: "June 3, 2026" },
+    { label: "Conference Date", value: "July 25, 2027" },
   ],
 
   documents: [
