@@ -687,7 +687,7 @@ const { hero, theme, keynote, schedule, speakerSchedule, importantDates, documen
 
           <div class="keynote-info">
             <h3>{k.name}</h3>
-            <p class="keynote-role">{k.title}</p>
+            <p class="keynote-role">{k.role}{k.role && k.institution ? ', ' : ''}{k.institution}</p>
             <p class="keynote-talk-title">{k.talkTitle}</p>
             <p class="keynote-description">{k.description}</p>
           </div>
