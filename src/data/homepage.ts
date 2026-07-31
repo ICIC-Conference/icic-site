@@ -13,9 +13,9 @@ const homepageData = {
   },
 
   hero: {
-    shortLabel: "ICIC 2026",
+    shortLabel: "ICIC2026",
     title: "International Conference on International Colleges 2026",
-    date: "Thursday, June 25, 2026",
+    date: "Sunday, July 25, 2027", June 25, 2026",
     venue: "Tunghai University International College",
     image: "/images/site/hero-home.jpg",
   },
@@ -258,7 +258,7 @@ const homepageData = {
     conferenceSupportDisplayOn: false,
     conferenceSupportText: "Funding permitting, we anticipate being able to provide the following for a limited number of participants:\nTwo nights of accommodation\nHigh-speed rail tickets from Taoyuan International Airport to Taichung\nA modest per diem",
     closingNoteText: "This is a fully in-person conference.",
-    submissionDeadlineDisplay: "",
+    submissionDeadlineDisplay: "May 5",
     contactName: "Chifumi Takagi",
     contactEmail: "ctakagi@thu.edu.tw",
     submitButtonDisplayOn: false,
