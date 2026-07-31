@@ -94,10 +94,6 @@ const homepageData = {
   ],
 
   importantDates: [
-    { label: "Oral Presentation Submission Deadline", value: "May 5, 2026" },
-    { label: "Poster Proposal Deadline", value: "May 8, 2026" },
-    { label: "Poster Files Due", value: "June 5, 2026" },
-    { label: "ICIC Conference", value: "June 25, 2026" },
   ],
 
   documents: [
