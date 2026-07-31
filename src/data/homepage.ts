@@ -15,7 +15,7 @@ const homepageData = {
   hero: {
     shortLabel: "ICIC2026",
     title: "International Conference on International Colleges 2026",
-    date: "Sunday, July 25, 2027", June 25, 2026",
+    date: "Sunday, July 25, 2027",
     venue: "Tunghai University International College",
     image: "/images/site/hero-home.jpg",
   },
