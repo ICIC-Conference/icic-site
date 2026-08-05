@@ -41,7 +41,9 @@ const homepageData = {
   schedule: [
     {
       time: "08:45–09:10",
-      columns: [{ width: "1fr", blocks: [{ title: "Registration", location: "M244" }] }],
+      columns: [
+        { width: "1fr", blocks: [{ title: "Registration", location: "M244" }] },
+      ],
     },
     {
       time: "09:10–10:10",
@@ -52,7 +54,9 @@ const homepageData = {
     },
     {
       time: "10:10–10:30",
-      columns: [{ width: "1fr", blocks: [{ title: "Morning Tea", location: "M232 & M233" }] }],
+      columns: [
+        { width: "1fr", blocks: [{ title: "Morning Tea", location: "M232 & M233" }] },
+      ],
     },
     {
       time: "10:30–12:30",
@@ -63,33 +67,35 @@ const homepageData = {
     },
     {
       time: "12:30–13:30",
-      columns: [{ width: "1fr", blocks: [{ title: "Lunch", location: "M232 & M233" }] }],
+      columns: [
+        { width: "1fr", blocks: [{ title: "Lunch", location: "M232 & M233" }] },
+      ],
     },
     {
       time: "13:30–15:30",
       columns: [
         { width: "1fr", blocks: [{ title: "Oral Sessions 3-A", location: "M145" }] },
         { width: "1fr", blocks: [{ title: "Oral Sessions 3-B", location: "M146" }] },
-        {
-          width: "1fr",
-          blocks: [
-            { title: "Program Introduction Session", location: "M244" },
-            { title: "Poster Session 2", location: "M232 & M233" },
-          ],
-        },
+        { width: "1fr", blocks: [{ title: "Program Introduction Session", location: "M244" }, { title: "Poster Session 2", location: "M232 & M233" }] },
       ],
     },
     {
       time: "15:30–16:00",
-      columns: [{ width: "1fr", blocks: [{ title: "Afternoon Tea", location: "M232 & M233" }] }],
+      columns: [
+        { width: "1fr", blocks: [{ title: "Afternoon Tea", location: "M232 & M233" }] },
+      ],
     },
     {
       time: "16:00–17:00",
-      columns: [{ width: "1fr", blocks: [{ title: "Keynote Address", talkTitle: "Unlocking Brain Potential: What and How to Learn in the AI Era", speaker: "Chi-Hung Juan, Chair Professor and Executive Vice President (National Central University)", location: "M201" }] }],
+      columns: [
+        { width: "1fr", blocks: [{ title: "Keynote Address", location: "M201", talkTitle: "Unlocking Brain Potential: What and How to Learn in the AI Era", speaker: "Chi-Hung Juan, Chair Professor and Executive Vice President (National Central University)" }] },
+      ],
     },
     {
       time: "17:00–17:30",
-      columns: [{ width: "1fr", blocks: [{ title: "Awards and Closing", location: "M201" }] }],
+      columns: [
+        { width: "1fr", blocks: [{ title: "Awards and Closing", location: "M201" }] },
+      ],
     },
   ],
 
