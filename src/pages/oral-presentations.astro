@@ -1,9 +1,12 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import homepageData from "../data/homepage";
+import baseHomepageData from "../data/homepage";
+import { getActiveHomepage, getActiveWebsiteYear } from "../lib/icicHomepage.mjs";
+const homepageData=getActiveHomepage(baseHomepageData);
 
 const { speakerSchedule, conferenceProgram, speakerScheduleDisplayOn, theme, hero, keynote, oralPresentationsPage } = homepageData;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const assetUrl=u=>/^https:\/\//i.test(u)?u:`${base}${u}`;
 ---
 
 <MainLayout title="Oral Presentations">
@@ -429,7 +432,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <div class="content-section">
 
       {conferenceProgram.displayOn && (
-        <p class="cfp-lede">The full conference program is now available <a href={`${base}${conferenceProgram.url}`} target="_blank" rel="noopener noreferrer">here</a>.</p>
+        <p class="cfp-lede">The full conference program is now available <a href={assetUrl(conferenceProgram.url)} target="_blank" rel="noopener noreferrer">here</a>.</p>
       )}
 
       <div class="intro">

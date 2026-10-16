@@ -1,15 +1,18 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import homepageData from "../data/homepage";
+import baseHomepageData from "../data/homepage";
+import { getActiveHomepage, getActiveWebsiteYear } from "../lib/icicHomepage.mjs";
+const homepageData=getActiveHomepage(baseHomepageData);
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const assetUrl=u=>/^https:\/\//i.test(u)?u:`${base}${u}`;
 const { hero, theme, keynote, schedule, speakerSchedule, importantDates, documents, sponsors, footer, video, conferenceProgram, scheduleDisplayOn, speakerScheduleDisplayOn } = homepageData;
 
 // Set to true to show the livestream section on the homepage.
 
 ---
 
-<MainLayout title="ICIC 2026">
+<MainLayout title={`ICIC ${getActiveWebsiteYear()||2026}`}>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@300;400;500;600&display=swap');
 
@@ -630,7 +633,7 @@ const { hero, theme, keynote, schedule, speakerSchedule, importantDates, documen
 
     <!-- Hero -->
     <section class="hero">
-      <img src={`${base}${hero.image}`} alt={hero.title} class="hero-image" />
+      <img src={assetUrl(hero.image)} alt={hero.title} class="hero-image" />
       <div class="hero-overlay">
         <div class="hero-text">
           <p class="hero-label">{hero.shortLabel}</p>
@@ -661,7 +664,7 @@ const { hero, theme, keynote, schedule, speakerSchedule, importantDates, documen
     {conferenceProgram.displayOn && (
       <!-- Program Announcement -->
       <section class="cfp-banner">
-        <p class="cfp-lede">The full conference program is now available <a href={`${base}${conferenceProgram.url}`} target="_blank" rel="noopener noreferrer">here</a>.</p>
+        <p class="cfp-lede">The full conference program is now available <a href={assetUrl(conferenceProgram.url)} target="_blank" rel="noopener noreferrer">here</a>.</p>
       </section>
     )}
 
@@ -681,7 +684,7 @@ const { hero, theme, keynote, schedule, speakerSchedule, importantDates, documen
       {keynote.map((k) => (
         <div class="keynote-grid">
           <div class="keynote-image-wrap">
-            <img src={`${base}${k.image}`} alt={k.name} class="keynote-image" />
+            <img src={assetUrl(k.image)} alt={k.name} class="keynote-image" />
             <div class="keynote-image-accent"></div>
           </div>
 
@@ -790,7 +793,7 @@ const { hero, theme, keynote, schedule, speakerSchedule, importantDates, documen
               <p class="doc-group-label">{group.group}</p>
               {group.items.map((doc) => (
                 <a
-                  href={doc.external ? doc.href : `${base}${doc.href}`}
+                  href={assetUrl(doc.href)}
                   class={`doc-link${doc.external ? ' doc-link-external' : ''}`}
                   target="_blank"
                   rel={doc.external ? 'noopener noreferrer' : ''}
@@ -810,7 +813,7 @@ const { hero, theme, keynote, schedule, speakerSchedule, importantDates, documen
         <div class="sponsor-grid">
           {sponsors.map((sponsor) => (
             <a href={sponsor.href} title={sponsor.name} target="_blank" rel="noopener noreferrer">
-              <img src={`${base}${sponsor.image}`} alt={sponsor.name} />
+              <img src={assetUrl(sponsor.image)} alt={sponsor.name} />
             </a>
           ))}
         </div>

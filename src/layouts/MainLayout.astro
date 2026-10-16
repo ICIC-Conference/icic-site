@@ -1,6 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import homepageData from "../data/homepage";
+import baseHomepageData from "../data/homepage";
+import { getActiveHomepage, getActiveWebsiteYear } from "../lib/icicHomepage.mjs";
+const homepageData=getActiveHomepage(baseHomepageData);
 import { readPublishedEditions } from "../lib/icicPublished.mjs";
 const { footer } = homepageData;
 const publishedEditions = readPublishedEditions();
@@ -18,7 +20,8 @@ const years = [...new Set(posters.map((poster) => poster.data.year))]
     return b - a;
   });
 
-const pageTitle = title === "ICIC 2026" ? title : `${title} | ICIC 2026`;
+const siteLabel=`ICIC ${getActiveWebsiteYear()||2026}`;
+const pageTitle = title === siteLabel ? title : `${title} | ${siteLabel}`;
 ---
 
 <html lang="en">
@@ -35,7 +38,7 @@ const pageTitle = title === "ICIC 2026" ? title : `${title} | ICIC 2026`;
     <meta property="og:description" content={description} />
     <meta property="og:image" content="https://icic.thu.edu.tw/images/logos/logo.jpg" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="ICIC 2026" />
+    <meta property="og:site_name" content={siteLabel} />
 
 <link rel="icon" type="image/png" href={`${base}/images/site/icon.png`} />
 

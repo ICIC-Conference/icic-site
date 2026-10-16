@@ -1,9 +1,12 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import homepageData from "../data/homepage";
+import baseHomepageData from "../data/homepage";
+import { getActiveHomepage, getActiveWebsiteYear } from "../lib/icicHomepage.mjs";
+const homepageData=getActiveHomepage(baseHomepageData);
 
 const { conferenceProgram, posterPresentationsPage } = homepageData;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const assetUrl=u=>/^https:\/\//i.test(u)?u:`${base}${u}`;
 ---
 
 <MainLayout title="Poster Presentations">
@@ -315,7 +318,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <div class="content-section">
 
 {conferenceProgram.displayOn && (
-<p class="cfp-lede">The full conference program is now available <a href={`${base}${conferenceProgram.url}`} target="_blank" rel="noopener noreferrer">here</a>.</p>
+<p class="cfp-lede">The full conference program is now available <a href={assetUrl(conferenceProgram.url)} target="_blank" rel="noopener noreferrer">here</a>.</p>
 )}
       
       <p class="categories-intro">Posters are accepted in {posterPresentationsPage.categories.length} categories:</p>
