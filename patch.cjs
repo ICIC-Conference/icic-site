@@ -1,0 +1,339 @@
+
+const fs = require('fs');
+const path = require('path');
+
+// Run from the ICIC-Conference/icic-site Astro repository.
+const root = process.cwd();
+const layoutPath = path.join(root, 'src', 'layouts', 'MainLayout.astro');
+const helperPath = path.join(root, 'src', 'lib', 'icicPublished.mjs');
+const cataloguePath = path.join(root, 'src', 'pages', 'conference', '[year].astro');
+
+if (!fs.existsSync(layoutPath)) throw Error('Run in the icic-site Astro project.');
+if (fs.existsSync(helperPath) || fs.existsSync(cataloguePath)) {
+  throw Error('Catalogue files already exist. No changes made.');
+}
+
+let layout = fs.readFileSync(layoutPath, 'utf8');
+function once(a,b) {
+  const pos=layout.indexOf(a);
+  if(pos<0 || layout.indexOf(a,pos+1)!==-1) {
+    throw Error('MainLayout anchor missing or repeated: '+a.slice(0,75));
+  }
+  layout=layout.slice(0,pos)+b+layout.slice(pos+a.length);
+}
+
+once(
+  'import homepageData from "../data/homepage";',
+  'import homepageData from "../data/homepage";\n'+
+  'import { readPublishedEditions } from "../lib/icicPublished.mjs";'
+);
+once(
+  'const { footer } = homepageData;',
+  'const { footer } = homepageData;\n'+
+  'const publishedEditions = readPublishedEditions();'
+);
+once(
+  '        <a href={`${base}/past-conferences`} class="nav-link">Past Conferences</a>',
+  '        <a href={`${base}/past-conferences`} class="nav-link">Past Conferences</a>\n'+
+  '        {publishedEditions.length > 0 && (\n'+
+  '          <details>\n'+
+  '            <summary>Conference Catalogue</summary>\n'+
+  '            <div class="dropdown-menu">\n'+
+  '              {publishedEditions.map(p => (\n'+
+  '                <a href={`${base}/conference/${p.year}`}>ICIC {p.year}</a>\n'+
+  '              ))}\n'+
+  '            </div>\n'+
+  '          </details>\n'+
+  '        )}'
+);
+once(
+  '        <a href={`${base}/past-conferences`}>Past Conferences</a>',
+  '        <a href={`${base}/past-conferences`}>Past Conferences</a>\n'+
+  '        {publishedEditions.map(p => (\n'+
+  '          <a href={`${base}/conference/${p.year}`}>ICIC {p.year} Catalogue</a>\n'+
+  '        ))}'
+);
+
+const helper = String.raw`import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+// Only published files committed to the Astro repository are used.
+// No direct database access, private tables, or live draft queries.
+export function readPublishedEditions() {
+  const root=join(process.cwd(),'public','icic-published');
+  if(!existsSync(root)) return [];
+  const editions=[];
+  for(const dir of readdirSync(root,{withFileTypes:true})) {
+    if(!dir.isDirectory() || !/^\d{4}$/.test(dir.name)) continue;
+    const year=Number(dir.name);
+    if(year<2027 || year>2200) continue;
+    function read(section) {
+      const file=join(root,dir.name,section+'.json');
+      if(!existsSync(file)) return null;
+      const data=JSON.parse(readFileSync(file,'utf8'));
+      if(Number(data.year)!==year) {
+        throw Error('Wrong ICIC publication year in '+file);
+      }
+      return data;
+    }
+    const programme=read('programme');
+    const posters=read('posters');
+    if(programme || posters) editions.push({year,programme,posters});
+  }
+  return editions.sort((a,b)=>b.year-a.year);
+}
+`;
+
+const catalogue = String.raw`---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { readPublishedEditions } from '../../lib/icicPublished.mjs';
+
+export function getStaticPaths() {
+  return readPublishedEditions().map(edition => ({
+    params:{year:String(edition.year)},
+    props:{edition}
+  }));
+}
+
+const {edition} = Astro.props;
+const {year,programme,posters:posterData} = edition;
+const sessions = Array.isArray(programme?.schedule) ? programme.schedule : [];
+const talks = Array.isArray(programme?.talks) ? programme.talks : [];
+const posters = Array.isArray(posterData?.posters) ? posterData.posters : [];
+const title = programme?.conference || posterData?.conference || ('ICIC '+year);
+const sortedSessions=[...sessions].sort((a,b)=>
+  String(a.date||'').localeCompare(String(b.date||'')) ||
+  String(a.start||'').localeCompare(String(b.start||'')));
+const sortedTalks=[...talks].sort((a,b)=>String(a.title||'').localeCompare(String(b.title||'')));
+const sortedPosters=[...posters].sort((a,b)=>String(a.code||'').localeCompare(String(b.code||'')));
+const talkById = new Map(talks.map(t=>[t.id,t]));
+const sessionByTalk = new Map();
+for (const s of sessions) for (const t of (s.talks||[])) {
+  if (!sessionByTalk.has(t.id)) sessionByTalk.set(t.id,s);
+}
+const categories=[...new Set(posters.map(p=>p.category).filter(Boolean))].sort();
+const divisions=[...new Set(posters.map(p=>p.division).filter(Boolean))].sort();
+const asTime=t=>String(t||'').slice(0,5);
+const presenterNames=t=>(t.presenters||[]).map(p=>p.name).filter(Boolean).join(', ');
+const imageUrl=v=>/^(https:\/\/[^\s<>"']+|\/(?!\/)[^\s<>"']+)$/.test(String(v||''))?String(v):'';
+const awards=p=>(p.awards||[]).map(a=>a.kind==='peoples_choice' ? "People's Choice" : String(a.rank)+(a.rank===1?'st':a.rank===2?'nd':a.rank===3?'rd':'th')+' Prize').join(' · ');
+---
+
+<MainLayout title={'ICIC '+year+' Conference Catalogue'} description={'Published conference catalogue for '+title}>
+  <div class="icic-catalogue">
+    <div class="icic-cat-hero">
+      <p class="icic-cat-kicker">International Conference on International Colleges · {year}</p>
+      <h1>{title}</h1>
+      <p>Published conference programme, presentations and information</p>
+    </div>
+
+    <nav class="icic-cat-nav" aria-label="Catalogue sections">
+      <a href="#schedule">Schedule</a>
+      <a href="#talks">Talks</a>
+      <a href="#posters">Posters</a>
+      <a href="#information">Information</a>
+    </nav>
+
+    <div class="icic-cat-content">
+      <section id="schedule" class="icic-cat-section">
+        <h2>Schedule</h2>
+        {!programme && <p>The schedule has not yet been published.</p>}
+        {programme && !sortedSessions.length && <p>No scheduled events are published yet.</p>}
+        {sortedSessions.map(s=>(
+          <article class="icic-cat-card" id={'session-'+s.id}>
+            <p class="icic-cat-meta">
+              {s.date} · {asTime(s.start)}–{asTime(s.end)} · {s.room||'Venue to be announced'}
+            </p>
+            <h3>{s.title}</h3>
+            {s.chair && <p>Chair: {s.chair}</p>}
+            {s.description && <p>{s.description}</p>}
+            {s.type==='oral' && (s.talks||[]).length>0 && (
+              <ol class="icic-cat-scheduled-talks">
+                {(s.talks||[]).map(x=>(
+                  <li>
+                    <span>{asTime(x.start)}{x.end ? '–'+asTime(x.end):''}</span>
+                    {' · '}
+                    {talkById.has(x.id)
+                      ? <a href={'#talk-'+x.id}>{talkById.get(x.id).title}</a>
+                      : <span>Presentation details not yet published</span>}
+                  </li>
+                ))}
+              </ol>
+            )}
+          </article>
+        ))}
+      </section>
+
+      <section id="talks" class="icic-cat-section">
+        <h2>Talks</h2>
+        {!programme && <p>Oral presentations have not yet been published.</p>}
+        {programme && !talks.length && <p>No oral presentations are published yet.</p>}
+        {talks.length>0 && (
+          <div class="icic-cat-tools">
+            <label>Search talks or presenters
+              <input id="icic-talk-search" type="search" placeholder="Title, speaker or institution" />
+            </label>
+            <label>Sort by
+              <select id="icic-talk-sort">
+                <option value="title">Title</option>
+                <option value="speaker">Speaker</option>
+              </select>
+            </label>
+          </div>
+        )}
+        <div id="icic-talk-list">
+          {sortedTalks.map(t=>(
+            <details class="icic-cat-card icic-cat-talk" id={'talk-'+t.id}
+              data-talk data-title={String(t.title||'').toLocaleLowerCase()}
+              data-speaker={presenterNames(t).toLocaleLowerCase()}
+              data-search={((t.title||'')+' '+presenterNames(t)+' '+(t.presenters||[]).map(p=>p.institution).join(' ')).toLocaleLowerCase()}>
+              <summary><strong>{t.title}</strong><span>{presenterNames(t)}</span></summary>
+              {(t.presenters||[]).map(p=><p class="icic-cat-meta">{p.name} · {p.institution}</p>)}
+              {t.panel_title && <p>Panel: {t.panel_title}</p>}
+              <p class="icic-cat-abstract">{t.abstract}</p>
+              {sessionByTalk.has(t.id) && (
+                <a class="icic-cat-link" href={'#session-'+sessionByTalk.get(t.id).id}>
+                  Go to Session →
+                </a>
+              )}
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section id="posters" class="icic-cat-section">
+        <h2>Posters</h2>
+        {!posterData && <p>The poster catalogue has not yet been published.</p>}
+        {posterData && !posters.length && <p>No posters are published yet.</p>}
+        {posters.length>0 && (
+          <div class="icic-cat-tools">
+            <label>Search posters
+              <input id="icic-poster-search" type="search" placeholder="Title, author, category, number" />
+            </label>
+            <label>Division
+              <select id="icic-poster-division"><option value="">All divisions</option>
+                {divisions.map(x=><option value={x}>{x}</option>)}
+              </select>
+            </label>
+            <label>Category
+              <select id="icic-poster-category"><option value="">All categories</option>
+                {categories.map(x=><option value={x}>{x}</option>)}
+              </select>
+            </label>
+            <label>Sort
+              <select id="icic-poster-sort">
+                <option value="code">Poster number</option>
+                <option value="title">Title</option>
+                <option value="author">Author</option>
+              </select>
+            </label>
+          </div>
+        )}
+        <div class="icic-cat-posters" id="icic-poster-list">
+          {sortedPosters.map(p=>{
+            const posterUrl=imageUrl(p.image);
+            const pdf=/\.pdf(?:[?#]|$)/i.test(posterUrl);
+            const authorNames=(p.authors||[]).join(', ');
+            return <article class="icic-cat-card icic-cat-poster"
+              data-poster data-title={String(p.title||'').toLocaleLowerCase()}
+              data-code={String(p.code||'').toLocaleLowerCase()}
+              data-author={authorNames.toLocaleLowerCase()}
+              data-category={p.category||''} data-division={p.division||''}
+              data-search={((p.title||'')+' '+authorNames+' '+(p.code||'')+' '+(p.category||'')+' '+(p.division||'')).toLocaleLowerCase()}>
+              {posterUrl && !pdf && <a href={posterUrl} target="_blank" rel="noopener noreferrer">
+                <img src={posterUrl} alt={'Poster: '+p.title} loading="lazy" />
+              </a>}
+              <p class="icic-cat-meta">{p.code} · {p.division} · {p.category}</p>
+              <h3>{p.title}</h3>
+              <p>{authorNames}</p>
+              {p.abstract && <p class="icic-cat-abstract">{p.abstract}</p>}
+              {awards(p) && <p class="icic-cat-award">{awards(p)}</p>}
+              {pdf && <p><a href={posterUrl} target="_blank" rel="noopener noreferrer">Open full poster PDF ↗</a></p>}
+              {!pdf && posterUrl && <p><a href={posterUrl} target="_blank" rel="noopener noreferrer">Open full poster ↗</a></p>}
+            </article>;
+          })}
+        </div>
+      </section>
+
+      <section id="information" class="icic-cat-section">
+        <h2>Information</h2>
+        <article class="icic-cat-card">
+          <h3>{title}</h3>
+          {programme?.start_date && <p><strong>Date:</strong> {programme.start_date}{programme.end_date && programme.end_date!==programme.start_date ? ' – '+programme.end_date : ''}</p>}
+          {programme?.venue && <p><strong>Venue:</strong> {programme.venue}</p>}
+          <p><strong>Location:</strong> Tunghai University, Taichung, Taiwan</p>
+          <p>Only information approved for website publication appears here.</p>
+        </article>
+      </section>
+    </div>
+  </div>
+
+  <style>
+    .icic-catalogue{background:#f8f6f1;color:#243446;min-height:70vh}
+    .icic-cat-hero{background:#1b3352;color:white;padding:45px clamp(20px,5vw,60px)}
+    .icic-cat-hero h1{font-size:clamp(1.7rem,4vw,2.7rem);line-height:1.2;max-width:850px;margin:10px 0}
+    .icic-cat-kicker{color:#e8c96a;font-size:.85rem;letter-spacing:.05em}
+    .icic-cat-nav{display:flex;gap:8px;flex-wrap:wrap;padding:12px clamp(18px,4vw,50px);border-bottom:1px solid #d8d0c0;background:white}
+    .icic-cat-nav a{padding:8px 14px;border-radius:4px;border:1px solid #d8d0c0;color:#1b3352;text-decoration:none;font-weight:600}
+    .icic-cat-nav a:hover{background:#f8f6f1}
+    .icic-cat-content{padding:16px clamp(18px,4vw,50px) 55px}
+    .icic-cat-section{padding-top:28px;scroll-margin-top:90px}
+    .icic-cat-section>h2{color:#1b3352;font-size:1.7rem;border-bottom:2px solid #b8882a;padding-bottom:10px}
+    .icic-cat-card{background:white;border:1px solid #ddd6ca;padding:17px 20px;margin:11px 0;border-radius:7px;scroll-margin-top:100px}
+    .icic-cat-card h3{font-size:1.14rem;color:#1b3352;margin:5px 0 8px}
+    .icic-cat-meta{font-size:.86rem;color:#636e7a;margin:6px 0}
+    .icic-cat-scheduled-talks{padding-left:24px}
+    .icic-cat-scheduled-talks li{margin:6px 0}
+    .icic-cat-card a{color:#925e15;text-underline-offset:3px}
+    .icic-cat-talk summary{cursor:pointer;display:grid;gap:5px}
+    .icic-cat-talk summary strong{color:#1b3352}
+    .icic-cat-talk summary span{font-size:.9rem;color:#657380}
+    .icic-cat-abstract{white-space:pre-wrap;line-height:1.7}
+    .icic-cat-link{display:inline-block;margin:12px 0 4px;font-weight:600}
+    .icic-cat-tools{display:flex;flex-wrap:wrap;gap:12px;padding:10px 0}
+    .icic-cat-tools label{display:grid;gap:5px;min-width:145px;flex:1;font-size:.85rem}
+    .icic-cat-tools input,.icic-cat-tools select{background:white;border:1px solid #b7b7b7;border-radius:4px;padding:9px;font:inherit;width:100%}
+    .icic-cat-posters{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:13px;align-items:start}
+    .icic-cat-poster img{width:100%;height:230px;object-fit:contain;background:#f2f2f2}
+    .icic-cat-award{font-weight:700;color:#8e601c}
+    [hidden]{display:none!important}
+    @media print{.icic-cat-tools,.icic-cat-nav{display:none}.icic-cat-card{break-inside:avoid}}
+  </style>
+  <script>
+    function initCatalogueList(listId, prefix, fields, filters) {
+      const list=document.getElementById(listId);
+      if(!list)return;
+      const cards=[...list.children];
+      const q=document.getElementById('icic-'+prefix+'-search');
+      const sort=document.getElementById('icic-'+prefix+'-sort');
+      const selects=filters.map(x=>[x,document.getElementById('icic-'+prefix+'-'+x)]);
+      function apply(){
+        const needle=(q?.value||'').trim().toLocaleLowerCase();
+        const sortKey=sort?.value||fields[0];
+        cards.sort((a,b)=>(a.dataset[sortKey]||'').localeCompare(b.dataset[sortKey]||''));
+        cards.forEach(card=>{
+          const matchText=(card.dataset.search||'').includes(needle);
+          const matchFilters=selects.every(([key,el])=>!el?.value||card.dataset[key]===el.value);
+          card.hidden=!(matchText&&matchFilters);
+          list.appendChild(card);
+        });
+      }
+      q?.addEventListener('input',apply);
+      sort?.addEventListener('change',apply);
+      selects.forEach(([,el])=>el?.addEventListener('change',apply));
+      apply();
+    }
+    initCatalogueList('icic-talk-list','talk',['title','speaker'],[]);
+    initCatalogueList('icic-poster-list','poster',['code','title','author'],['category','division']);
+  </script>
+</MainLayout>
+`;
+
+// All validation/anchor replacement is finished; write only now.
+fs.mkdirSync(path.dirname(helperPath), {recursive:true});
+fs.mkdirSync(path.dirname(cataloguePath), {recursive:true});
+fs.writeFileSync(helperPath,helper);
+fs.writeFileSync(cataloguePath,catalogue);
+fs.writeFileSync(layoutPath,layout);
+console.log('Published ICIC catalogue installed in the Astro site.');
+console.log('Run npm run build; no Supabase or CMS changes are required.');

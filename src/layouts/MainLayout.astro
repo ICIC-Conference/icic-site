@@ -1,7 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 import homepageData from "../data/homepage";
+import { readPublishedEditions } from "../lib/icicPublished.mjs";
 const { footer } = homepageData;
+const publishedEditions = readPublishedEditions();
 
 const { title, description = "ICIC 2026: Seventy Years Forward — Liberal Learning for a Changing World. June 25, 2026, Tunghai University, Taichung." } = Astro.props;
 
@@ -303,6 +305,16 @@ const pageTitle = title === "ICIC 2026" ? title : `${title} | ICIC 2026`;
         <a href={`${base}/oral-presentations`} class="nav-link">Oral Presentations</a>
         <a href={`${base}/poster-presentations`} class="nav-link">Poster Presentations</a>
         <a href={`${base}/past-conferences`} class="nav-link">Past Conferences</a>
+        {publishedEditions.length > 0 && (
+          <details>
+            <summary>Conference Catalogue</summary>
+            <div class="dropdown-menu">
+              {publishedEditions.map(p => (
+                <a href={`${base}/conference/${p.year}`}>ICIC {p.year}</a>
+              ))}
+            </div>
+          </details>
+        )}
 
         <details>
           <summary>Posters</summary>
@@ -325,6 +337,9 @@ const pageTitle = title === "ICIC 2026" ? title : `${title} | ICIC 2026`;
         <a href={`${base}/oral-presentations`}>Oral Presentations</a>
         <a href={`${base}/poster-presentations`}>Poster Presentations</a>
         <a href={`${base}/past-conferences`}>Past Conferences</a>
+        {publishedEditions.map(p => (
+          <a href={`${base}/conference/${p.year}`}>ICIC {p.year} Catalogue</a>
+        ))}
         {years.map((year) => (
           <a href={`${base}/previous-posters/${year}`}>Posters – {year}</a>
         ))}
